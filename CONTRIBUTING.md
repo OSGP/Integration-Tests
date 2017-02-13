@@ -1,7 +1,5 @@
 # Thank you for contributing!  
 
-Please comply with the [code of conduct](http://documentation.opensmartgridplatform.org/Opensourcecommunity/Code-of-conduct.html) and [documentation guidelines](http://documentation.opensmartgridplatform.org/Opensourcecommunity/Contributing-to-documentation.html).
-
 ## To get started
 
 1. Fork the repository, do work in a feature branch.
@@ -18,4 +16,4 @@ If you have any questions, open an issue.
 
 ## Help
 
-Don't hesitate to reach-out for help by mention a maintainer or other relevant contributors.
+Don't hesitate to reach out for help by [mentioning](https://github.com/blog/821-mention-somebody-they-re-notified) a maintainer or other relevant contributors.

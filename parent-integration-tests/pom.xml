@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-  Copyright 2015 Smart Society Services B.V.
-
-  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
--->
+<!-- Copyright 2015 Smart Society Services B.V. Licensed under the Apache 
+  License, Version 2.0 (the "License"); you may not use this file except in 
+  compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>parent-integration-tests</artifactId>
   <groupId>com.alliander.osgp</groupId>
-  <version>4.3.0</version>
+  <version>4.6.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>parent-integration-tests</name>
-  <!-- Description, Organization, Licences, URL and Distribution Management elements are needed for the maven-jxr-plugin to generate a maven site -->
+  <!-- Description, Organization, Licences, URL and Distribution Management 
+    elements are needed for the maven-jxr-plugin to generate a maven site -->
   <description>Parent module.</description>
   <organization>
     <name>OSGP</name>
@@ -33,29 +28,34 @@
   <url>${maven.site.url}</url>
   <distributionManagement>
     <site>
-      <id>pa-oslp</id>
-      <name>pa-oslp</name>
+      <id>parent-integration-tests</id>
+      <name>parent-integration-tests</name>
       <!-- URL is passed in as a maven argument: -Dmaven.site.distributionManagement.site.url=file:////the/path/to/deploy/the/site/to -->
       <url>${maven.site.distributionManagement.site.url}</url>
     </site>
   </distributionManagement>
 
   <properties>
-    <module.baseUri>${project.baseUri}/../</module.baseUri>
-    <osgp.version>4.3.0</osgp.version>
-    <osgp.dlms.version>3.5.0-SNAPSHOT</osgp.dlms.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring.version>3.2.10.RELEASE</spring.version>
-    <spring.ws.version>2.1.4.RELEASE</spring.ws.version>
-    <spring.data.version>1.6.4.RELEASE</spring.data.version>
-    <spring.security.version>3.2.5.RELEASE</spring.security.version>
+
+    <module.baseUri>${project.baseUri}/../</module.baseUri>
+    <osgp.version>${project.version}</osgp.version>
+    <osgp.dlms.version>3.5.0-SNAPSHOT</osgp.dlms.version>
+    <osgp.iec61850.simulator.version>4.1.0-SNAPSHOT</osgp.iec61850.simulator.version>
+
+    <spring.version>4.3.5.RELEASE</spring.version>
+    <spring.ws.version>2.4.0.RELEASE</spring.ws.version>
+    <spring.data.version>1.9.6.RELEASE</spring.data.version>
+    <spring.data.key.version>1.1.6.RELEASE</spring.data.key.version>
+    <spring.security.version>4.2.1.RELEASE</spring.security.version>
     <servlet.version>3.0.1</servlet.version>
     <servlet.jstl.version>1.2</servlet.jstl.version>
     <protobuf.version>2.4.1</protobuf.version>
     <postgresql.version>9.3-1102-jdbc41</postgresql.version>
     <hibernate.version>4.2.16.Final</hibernate.version>
     <hibernate.validator.version>4.3.1.Final</hibernate.validator.version>
+    <hibernate.jpa.version>1.0.1.Final</hibernate.jpa.version>
     <junit.version>4.11</junit.version>
     <joda.version>2.4</joda.version>
     <bonecp.version>0.8.0.RELEASE</bonecp.version>
@@ -63,7 +63,7 @@
     <slf4j.version>1.7.7</slf4j.version>
     <apache.commons.lang.version>3.3.2</apache.commons.lang.version>
     <apache.httpcomponents.version>4.3.5</apache.httpcomponents.version>
-    <jackson.version>2.4.2</jackson.version>
+    <jackson.version>2.8.6</jackson.version>
     <commons.codec.version>1.9</commons.codec.version>
     <orika.version>1.4.5</orika.version>
     <netty.version>3.9.4.Final</netty.version>
@@ -72,11 +72,10 @@
     <checkstyle.version>2.12.1</checkstyle.version>
     <pmd.version>4.3</pmd.version>
     <jxr.version>2.5</jxr.version>
-    <maven.project.info.reports.plugin.version>2.8</maven.project.info.reports.plugin.version>
     <findbug.version>3.0.0</findbug.version>
     <apache.activemq.version>5.10.0</apache.activemq.version>
     <commons.pool.version>1.6</commons.pool.version>
-    <jackson.jaxrs.version>2.4.2</jackson.jaxrs.version>
+    <jackson.jaxrs.version>2.8.6</jackson.jaxrs.version>
     <proton-jms.version>0.7</proton-jms.version>
     <cxf.version>3.0.1</cxf.version>
     <logback.version>1.1.2</logback.version>
@@ -84,8 +83,29 @@
     <SunriseSunsetCalculator.version>1.1</SunriseSunsetCalculator.version>
     <mockito.version>1.9.5</mockito.version>
     <apache.commons.schema>2.0.3</apache.commons.schema>
-    <maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
+    <maven.project.info.reports.plugin.version>2.9</maven.project.info.reports.plugin.version>
+    <maven.compiler.plugin.version>3.6.0</maven.compiler.plugin.version>
     <license.maven.plugin>2.11</license.maven.plugin>
+    <cucumber.version>1.2.4</cucumber.version>
+    <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
+    <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+    <maven.failsafe.plugin.version>2.19.1</maven.failsafe.plugin.version>
+    <soapui.maven.plugin.version>5.2.1</soapui.maven.plugin.version>
+    <jgoodies.version>1.0.5</jgoodies.version>
+    <jacoco.version>0.7.8</jacoco.version>
+    <sun.httpserver.version>20070405</sun.httpserver.version>
+    <maven.javadoc.version>2.10.4</maven.javadoc.version>
+
+    <!-- Default always skip integration tests, to ensure all developer data 
+      is retained -->
+    <skipITs>true</skipITs>
+
+    <!-- Skip code coverage gathering with Jacoco on IT tests from Tomcat. 
+      Requires jacoco-agent to be setup on remote Tomcat -->
+    <skipITCoverage>true</skipITCoverage>
+
+    <!-- Address of Tomcat instance -->
+    <addressITCoverage>localhost</addressITCoverage>
   </properties>
 
   <repositories>
@@ -111,6 +131,10 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <id>smartbear-sweden-plugin-repository</id>
+      <url>http://www.soapui.org/repository/maven2</url>
+    </repository>
   </repositories>
 
   <dependencyManagement>
@@ -134,37 +158,13 @@
 
       <dependency>
         <groupId>com.alliander.osgp</groupId>
-        <artifactId>osgp-adapter-ws-shared</artifactId>
-        <version>${osgp.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.alliander.osgp</groupId>
-        <artifactId>osgp-adapter-ws-shared-db</artifactId>
-        <version>${osgp.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-domain-core</artifactId>
         <version>${osgp.version}</version>
       </dependency>
 
       <dependency>
         <groupId>com.alliander.osgp</groupId>
-        <artifactId>osgp-domain-publiclighting</artifactId>
-        <version>${osgp.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.alliander.osgp</groupId>
-        <artifactId>osgp-domain-tariffswitching</artifactId>
-        <version>${osgp.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.alliander.osgp</groupId>
-        <artifactId>osgp-adapter-ws-smartmetering</artifactId>
+        <artifactId>osgp-domain-microgrids</artifactId>
         <version>${osgp.version}</version>
       </dependency>
 
@@ -174,47 +174,46 @@
         <version>${osgp.version}</version>
         <classifier>classes</classifier>
       </dependency>
-
       <dependency>
         <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-adapter-ws-core</artifactId>
         <version>${osgp.version}</version>
         <classifier>classes</classifier>
       </dependency>
-
+      <dependency>
+        <groupId>com.alliander.osgp</groupId>
+        <artifactId>osgp-adapter-ws-shared</artifactId>
+        <version>${osgp.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alliander.osgp</groupId>
+        <artifactId>osgp-adapter-ws-shared-db</artifactId>
+        <version>${osgp.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alliander.osgp</groupId>
+        <artifactId>osgp-adapter-ws-microgrids</artifactId>
+        <version>${osgp.version}</version>
+        <classifier>classes</classifier>
+      </dependency>
       <dependency>
         <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-adapter-ws-publiclighting</artifactId>
         <version>${osgp.version}</version>
         <classifier>classes</classifier>
       </dependency>
-
       <dependency>
         <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-adapter-ws-tariffswitching</artifactId>
         <version>${osgp.version}</version>
         <classifier>classes</classifier>
       </dependency>
-
       <dependency>
         <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-adapter-ws-smartmetering</artifactId>
         <version>${osgp.version}</version>
         <classifier>classes</classifier>
       </dependency>
-
-      <dependency>
-        <groupId>com.alliander.osgp</groupId>
-        <artifactId>platform-ws-generated</artifactId>
-        <version>${osgp.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.alliander.osgp</groupId>
-        <artifactId>osgp-platform-test</artifactId>
-        <version>${osgp.version}</version>
-      </dependency>
-
       <dependency>
         <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-adapter-domain-shared</artifactId>
@@ -230,6 +229,12 @@
       <dependency>
         <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-adapter-domain-core</artifactId>
+        <version>${osgp.version}</version>
+        <classifier>classes</classifier>
+      </dependency>
+      <dependency>
+        <groupId>com.alliander.osgp</groupId>
+        <artifactId>osgp-adapter-domain-microgrids</artifactId>
         <version>${osgp.version}</version>
         <classifier>classes</classifier>
       </dependency>
@@ -258,7 +263,7 @@
         <version>${osgp.version}</version>
         <classifier>classes</classifier>
       </dependency>
-        <dependency>
+      <dependency>
         <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-core-db-api</artifactId>
         <version>${osgp.version}</version>
@@ -296,6 +301,27 @@
         <artifactId>osgp-protocol-adapter-dlms</artifactId>
         <version>${osgp.dlms.version}</version>
         <classifier>classes</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alliander.osgp</groupId>
+        <artifactId>osgp-protocol-adapter-iec61850</artifactId>
+        <version>${osgp.version}</version>
+        <classifier>classes</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alliander.osgp</groupId>
+        <artifactId>osgp-protocol-simulator-iec61850</artifactId>
+        <version>${osgp.iec61850.simulator.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alliander</groupId>
+        <artifactId>cucumber-tests-platform</artifactId>
+        <version>${osgp.version}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
       </dependency>
 
       <!-- Spring Framework -->
@@ -344,6 +370,12 @@
         <artifactId>spring-webmvc</artifactId>
         <version>${spring.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+        <scope>test</scope>
+      </dependency>
       <!-- Spring WS -->
       <dependency>
         <groupId>org.springframework.ws</groupId>
@@ -375,21 +407,33 @@
         <version>${spring.data.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-keyvalue</artifactId>
+        <version>${spring.data.key.version}</version>
+      </dependency>
+
       <!-- Spring Security -->
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-core</artifactId>
         <version>${spring.security.version}</version>
-      </dependency>  
+      </dependency>
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-web</artifactId>
         <version>${spring.security.version}</version>
-      </dependency>  
+      </dependency>
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-config</artifactId>
         <version>${spring.security.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate.javax.persistence</groupId>
+        <artifactId>hibernate-jpa-2.0-api</artifactId>
+        <version>${hibernate.jpa.version}</version>
       </dependency>
 
       <!-- Servlet API 3.0 -->
@@ -460,7 +504,7 @@
       </dependency>
 
       <!-- Jackson (JSON) -->
-        <dependency>
+      <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
         <version>${jackson.version}</version>
@@ -562,7 +606,7 @@
         <groupId>org.apache.activemq</groupId>
         <artifactId>activemq-kahadb-store</artifactId>
         <version>${apache.activemq.version}</version>
-      </dependency>  
+      </dependency>
 
       <!-- Orika (mapping framework) -->
       <dependency>
@@ -598,10 +642,15 @@
         <version>${slf4j.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>log4j-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
         <version>${logback.version}</version>
-      </dependency>    
+      </dependency>
       <dependency>
         <groupId>org.logback-extensions</groupId>
         <artifactId>logback-ext-spring</artifactId>
@@ -631,6 +680,54 @@
         <groupId>com.mycila</groupId>
         <artifactId>license-maven-plugin</artifactId>
         <version>${license.maven.plugin}</version>
+      </dependency>
+
+      <!-- Cucumber Framework -->
+      <dependency>
+        <groupId>info.cukes</groupId>
+        <artifactId>cucumber-junit</artifactId>
+        <version>${cucumber.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>info.cukes</groupId>
+        <artifactId>cucumber-java</artifactId>
+        <version>${cucumber.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>info.cukes</groupId>
+        <artifactId>cucumber-spring</artifactId>
+        <version>${cucumber.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- SOAP-UI -->
+      <dependency>
+        <groupId>com.smartbear.soapui</groupId>
+        <artifactId>soapui-maven-plugin</artifactId>
+        <version>${soapui.maven.plugin.version}</version>
+        <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <artifactId>httpcore</artifactId>
+            <groupId>org.apache.httpcomponents</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>jfxrt</artifactId>
+            <groupId>javafx</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <!-- Included because of open bug in SOAP-UI: https://sourceforge.net/p/soapui/bugs/694/ -->
+      <dependency>
+        <groupId>jgoodies</groupId>
+        <artifactId>forms</artifactId>
+        <version>${jgoodies.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.net.httpserver</groupId>
+        <artifactId>http</artifactId>
+        <version>${sun.httpserver.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -692,21 +789,172 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>com.smartbear.soapui</groupId>
+          <artifactId>soapui-maven-plugin</artifactId>
+          <version>${soapui.maven.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven.surefire.plugin.version}</version>
+          <configuration>
+            <argLine>${surefireArgLine}</argLine>
+            <excludes>
+              <!-- Cucumber integration tests, included with Failsafe. -->
+              <exclude>**/cucumber/**/AcceptanceTests.java</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${maven.failsafe.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>integration-test</id>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <skipITs>${skipITs}</skipITs>
+            <includes>
+              <!-- Cucumber integration tests, excluded with Surefire. -->
+              <include>**/cucumber/**/AcceptanceTests.java</include>
+            </includes>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+            <encoding>${project.build.sourceEncoding}</encoding>
+          </configuration>
+          <version>${maven.compiler.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${maven.javadoc.version}</version>
+          <configuration>
+            <additionalparam>-Xdoclint:none</additionalparam>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven.jar.plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>test-jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.version}</version>
+          <executions>
+            <!-- Prepares the property pointing to the JaCoCo runtime agent 
+              which is passed as VM argument when Maven the Surefire plugin is executed. -->
+            <execution>
+              <id>pre-unit-test</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+              <configuration>
+                <!-- Sets the path to the file which contains the execution 
+                  data. -->
+                <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+                <!-- Sets the name of the property containing the settings 
+                  for JaCoCo runtime agent. -->
+                <propertyName>surefireArgLine</propertyName>
+                <skipTests>${skipTests}</skipTests>
+              </configuration>
+            </execution>
+            <execution>
+              <id>default-report</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+              <configuration>
+                <!-- Sets the path to the file which contains the execution 
+                  data. -->
+                <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                <!-- Sets the output directory for the code coverage report. -->
+                <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                <skipTests>${skipTests}</skipTests>
+              </configuration>
+            </execution>
+            <!-- Ensures that the code coverage report for unit tests is 
+              created after unit tests have been run. -->
+            <execution>
+              <id>post-unit-test</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+              <configuration>
+                <!-- Sets the path to the file which contains the execution 
+                  data. -->
+                <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                <!-- Sets the output directory for the code coverage report. -->
+                <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                <skipTests>${skipTests}</skipTests>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.version}</version>
+          <executions>
+            <!-- Reset the code coverage before the integration tests are 
+              started. Ensures Tomcat startup code execution is ignored in report -->
+            <execution>
+              <id>pre-integration-test</id>
+              <phase>pre-integration-test</phase>
+              <goals>
+                <goal>dump</goal>
+              </goals>
+              <configuration>
+                <address>${addressITCoverage}</address>
+                <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+                <dump>false</dump>
+                <append>false</append>
+                <reset>true</reset>
+                <skip>${skipITCoverage}</skip>
+              </configuration>
+            </execution>
+            <!-- Download code coverage from Tomcat -->
+            <execution>
+              <id>post-integration-test</id>
+              <phase>post-integration-test</phase>
+              <goals>
+                <goal>dump</goal>
+              </goals>
+              <configuration>
+                <address>${addressITCoverage}</address>
+                <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+                <dump>true</dump>
+                <append>false</append>
+                <reset>true</reset>
+                <skip>${skipITCoverage}</skip>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
-
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <fork>true</fork>
-          <executable>${JAVA_1_7_HOME}/bin/javac</executable>
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-    </plugins>
   </build>
 
   <reporting>
