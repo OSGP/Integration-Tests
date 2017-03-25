@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.alliander.osgp</groupId>
   <artifactId>integration-tests</artifactId>
-  <version>4.6.0-SNAPSHOT</version>
+  <version>4.8.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <!-- Description, Organization, Licences, URL and Distribution Management 
@@ -39,6 +39,12 @@
     <module>parent-integration-tests</module>
     <module>Shared/shared</module>
     <module>Shared/osgp-dto</module>
+    <module>Shared/osgp-ws-core</module>
+    <module>Shared/osgp-ws-admin</module>
+    <module>Shared/osgp-ws-microgrids</module>
+    <module>Shared/osgp-ws-publiclighting</module>
+    <module>Shared/osgp-ws-tariffswitching</module>
+    <module>Shared/osgp-ws-smartmetering</module>
 
     <!-- Protocol-Adapter-IEC61850 -->
     <module>Protocol-Adapter-IEC61850/osgp-iec61850</module>
@@ -86,8 +92,6 @@
     <module>Platform/osgp-core</module>
     <module>Platform/osgp-logging</module>
 
-    <!-- Temporary switched off, since the test servers are not available yet, 
-      only local deployment test (which will fail op build server -->
     <!-- Automatic tests project -->
     <module>cucumber-tests-platform</module>
     <module>cucumber-tests-platform-dlms</module>

@@ -13,7 +13,7 @@
   <parent>
     <groupId>com.alliander.osgp</groupId>
     <artifactId>parent-integration-tests</artifactId>
-    <version>4.6.0-SNAPSHOT</version>
+    <version>4.8.0-SNAPSHOT</version>
     <relativePath>../parent-integration-tests/pom.xml</relativePath>
   </parent>
 
@@ -115,12 +115,11 @@
       <classifier>classes</classifier>
     </dependency>
 
-    <!-- Cucumber platform -->
+    <!-- Automatic tests platform -->
     <dependency>
       <groupId>com.alliander</groupId>
       <artifactId>cucumber-tests-platform</artifactId>
       <type>test-jar</type>
-      <scope>test</scope>
     </dependency>
 
   </dependencies>
