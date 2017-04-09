@@ -4,18 +4,24 @@ Feature: CoreDeviceInstallation Device Starting
   In order to ...
 
   @OslpMockServer
-  Scenario: Start an ssld device
+  Scenario Outline: Start an ssld device
     Given an ssld oslp device
       | DeviceIdentification       | TEST1024000000001 |
       | OrganizationIdentification | test-org          |
-    And the device returns a start device response "OK" over OSLP
+      | Protocol                   | <Protocol>        |
+    And the device returns a start device response "OK" over "<Protocol>"
     When receiving a start device test request
       | DeviceIdentification | TEST1024000000001 |
     Then the start device async response contains
       | DeviceIdentification | TEST1024000000001 |
-    And a start device OSLP message is sent to device "TEST1024000000001"
+    And a start device "<Protocol>" message is sent to device "TEST1024000000001"
     And the platform buffers a start device response message for device "TEST1024000000001"
       | Result | OK |
+
+    Examples: 
+      | Protocol    |
+      | OSLP        |
+      | OSLP ELSTER |
 
   Scenario Outline: Start device with incorrect parameters
     Given an ssld device
