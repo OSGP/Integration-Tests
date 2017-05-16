@@ -32,6 +32,10 @@ public class Keys extends com.alliander.osgp.cucumber.platform.Keys {
     // other
     public static final String DEVICE_TYPE = "DeviceType";
     public static final String GAS_DEVICE_IDENTIFICATION = "GasDeviceIdentification";
+
+    /**
+     * Use this device identification key in sending the request to OSGP
+     */
     public static final String GATEWAY_DEVICE_IDENTIFICATION = "GatewayDeviceIdentification";
 
     public static final String GPS_LATITUDE = "GpsLatitude";
@@ -94,4 +98,10 @@ public class Keys extends com.alliander.osgp.cucumber.platform.Keys {
     public static final String RESULT = "Result";
     public static final String DAYLIGHT_SAVINGS_ACTIVE = "DST";
     public static final String DEVIATION = "Deviation";
+
+    public static final String BUNDLE_RESPONSE = "BundleResponse";
+    public static final String BUNDLE_REQUEST = "BundleRequest";
+    public static final String BUNDLE_ACTION_COUNT = "BundleActionCount";
+    public static final String BUNDLE_RESPONSE_COUNT = "BundleResponseCount";
+
 }

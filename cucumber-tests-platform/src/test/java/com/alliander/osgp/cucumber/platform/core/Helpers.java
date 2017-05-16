@@ -149,6 +149,7 @@ public class Helpers {
      * <p>
      * <ul>
      * <li>now + 3 months
+     * <li>now + 1 minutes
      * <li>tomorrow - 1 year
      * <li>yesterday + 2 weeks
      * <li>today at midday
@@ -225,36 +226,54 @@ public class Helpers {
 
         if (op.equals("+")) {
             switch (what) {
+            case "day":
             case "days":
                 retval = retval.plusDays(numberToAddOrSubstract);
                 break;
+            case "minute":
+            case "minutes":
+                retval = retval.plusMinutes(numberToAddOrSubstract);
+                break;
+            case "hour":
             case "hours":
                 retval = retval.plusHours(numberToAddOrSubstract);
                 break;
+            case "week":
             case "weeks":
                 retval = retval.plusWeeks(numberToAddOrSubstract);
                 break;
+            case "month":
             case "months":
                 retval = retval.plusMonths(numberToAddOrSubstract);
                 break;
+            case "year":
             case "years":
                 retval = retval.plusYears(numberToAddOrSubstract);
                 break;
             }
         } else {
             switch (what) {
+            case "day":
             case "days":
                 retval = retval.minusDays(numberToAddOrSubstract);
                 break;
+            case "hour":
             case "hours":
                 retval = retval.minusHours(numberToAddOrSubstract);
                 break;
+            case "minute":
+            case "minutes":
+                retval = retval.minusMinutes(numberToAddOrSubstract);
+                break;
+            case "week":
             case "weeks":
                 retval = retval.minusWeeks(numberToAddOrSubstract);
                 break;
+            case "month":
             case "months":
                 retval = retval.minusMonths(numberToAddOrSubstract);
                 break;
+            case "year":
             case "years":
                 retval = retval.minusYears(numberToAddOrSubstract);
                 break;
@@ -335,7 +354,9 @@ public class Helpers {
      * @return
      */
     public static Integer getInteger(final Map<String, String> settings, final String key) {
-
+        if (settings.get(key) == null) {
+            return null;
+        }
         return Integer.parseInt(settings.get(key));
     }
 
