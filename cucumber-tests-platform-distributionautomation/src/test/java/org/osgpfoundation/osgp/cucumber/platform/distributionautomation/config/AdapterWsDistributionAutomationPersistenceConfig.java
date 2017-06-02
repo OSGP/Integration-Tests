@@ -22,17 +22,17 @@ import org.osgpfoundation.osgp.adapter.ws.da.domain.repositories.RtuResponseData
 import com.alliander.osgp.cucumber.platform.config.ApplicationPersistenceConfiguration;
 
 @Configuration
-@EnableJpaRepositories(entityManagerFactoryRef = "entityMgrFactWsMicrogrids", transactionManagerRef = "txMgrWsMicrogrids", basePackageClasses = {
+@EnableJpaRepositories(entityManagerFactoryRef = "entityMgrFactWsDistributionAutomation", transactionManagerRef = "txMgrWsDistributionAutomation", basePackageClasses = {
         RtuResponseDataRepository.class })
-public class AdapterWsMicrogridsPersistenceConfig extends ApplicationPersistenceConfiguration {
+public class AdapterWsDistributionAutomationPersistenceConfig extends ApplicationPersistenceConfiguration {
 
-    public AdapterWsMicrogridsPersistenceConfig() {
+    public AdapterWsDistributionAutomationPersistenceConfig() {
     }
 
-    @Value("${db.name.osgp_adapter_ws_microgrids}")
+    @Value("${db.name.osgp_adapter_ws_distributionautomation}")
     private String databaseName;
 
-    @Value("${entitymanager.packages.to.scan.ws.microgrids}")
+    @Value("${entitymanager.packages.to.scan.ws.distributionautomation}")
     private String entitymanagerPackagesToScan;
 
     @Override
@@ -50,7 +50,7 @@ public class AdapterWsMicrogridsPersistenceConfig extends ApplicationPersistence
      *
      * @return DataSource
      */
-    @Bean(name = "dsWsMicrogrids")
+    @Bean(name = "dsWsDistributionAutomation")
     public DataSource dataSource() {
         return this.makeDataSource();
     }
@@ -62,11 +62,11 @@ public class AdapterWsMicrogridsPersistenceConfig extends ApplicationPersistence
      * @throws ClassNotFoundException
      *             when class not found
      */
-    @Bean(name = "entityMgrFactWsMicrogrids")
+    @Bean(name = "entityMgrFactWsDistributionAutomation")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            @Qualifier("dsWsMicrogrids") final DataSource dataSource) throws ClassNotFoundException {
+            @Qualifier("dsWsDistributionAutomation") final DataSource dataSource) throws ClassNotFoundException {
 
-        return this.makeEntityManager("OSGP_CUCUMBER_WS_MICROGRIDS", dataSource);
+        return this.makeEntityManager("OSGP_CUCUMBER_WS_DISTRIBUTIONAUTOMATION", dataSource);
     }
 
     /**
@@ -76,9 +76,9 @@ public class AdapterWsMicrogridsPersistenceConfig extends ApplicationPersistence
      * @throws ClassNotFoundException
      *             when class not found
      */
-    @Bean(name = "txMgrWsMicrogrids")
+    @Bean(name = "txMgrWsDistributionAutomation")
     public JpaTransactionManager transactionManager(
-            @Qualifier("entityMgrFactWsMicrogrids") final EntityManagerFactory barEntityManagerFactory) {
+            @Qualifier("entityMgrFactWsDistributionAutomation") final EntityManagerFactory barEntityManagerFactory) {
         return new JpaTransactionManager(barEntityManagerFactory);
     }
 

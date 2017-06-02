@@ -5,13 +5,13 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package com.alliander.osgp.cucumber.platform.microgrids.config;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.alliander.osgp.cucumber.platform.microgrids.mocks.iec61850.Iec61850MockServer;
+import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.mocks.iec61850.Iec61850MockServer;
 
 @Configuration
 public class Iec61850MockServerConfig {
@@ -25,17 +25,7 @@ public class Iec61850MockServerConfig {
     }
 
     @Bean(destroyMethod = "stop", initMethod = "start")
-    public Iec61850MockServer iec61850MockServerPampus() {
-        return new Iec61850MockServer("PAMPUS", "Pampus_v0.4.5.icd", 62102, "WAGO61850Server");
-    }
-
-    @Bean(destroyMethod = "stop", initMethod = "start")
-    public Iec61850MockServer iec61850MockServerMarkerWadden() {
-        return new Iec61850MockServer("MARKER WADDEN", "MarkerWadden_0_1_1.icd", 62103, "WAGO61850Server");
-    }
-
-    @Bean(destroyMethod = "stop", initMethod = "start")
-    public Iec61850MockServer iec61850MockServerWago() {
-        return new Iec61850MockServer("WAGO", "WAGO123.icd", 62104, "WAGO123");
+    public Iec61850MockServer iec61850MockServerWAGO61850ServerRTU1() {
+        return new Iec61850MockServer("WAGO61850ServerRTU1", "Simple_substation_v0.13 (incl. 2 bays and edition 2.0).icd", 62105, "WAGO61850ServerRTU1");
     }
 }

@@ -5,7 +5,7 @@
  * use this file except in compliance with the License.
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  */
-package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config.ws.microgrids;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config.ws.distributionautomation;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,19 +17,19 @@ import com.alliander.osgp.cucumber.core.config.ws.BaseWebServiceConfig;
 import com.alliander.osgp.shared.infra.ws.DefaultWebServiceTemplateFactory;
 
 @Configuration
-public class MicrogridsAdhocManagementWebServiceConfig extends BaseWebServiceConfig {
+public class DistributionAutomationAdhocManagementWebServiceConfig extends BaseWebServiceConfig {
 
-    @Value("${web.service.template.default.uri.microgrids.adhocmanagement}")
-    private String webserviceTemplateDefaultUriMicrogridsAdHocManagement;
+    @Value("${web.service.template.default.uri.distributionautomation.generic}")
+    private String webserviceTemplateDefaultUriDistributionAutomationAdHocManagement;
 
-    @Value("${jaxb2.marshaller.context.path.microgrids.adhocmanagement}")
-    private String contextPathMicrogridsAdHocManagement;
+    @Value("${jaxb2.marshaller.context.path.distributionautomation.generic}")
+    private String contextPathDistributionAutomationAdHocManagement;
 
     @Bean
-    public DefaultWebServiceTemplateFactory webServiceTemplateFactoryMicrogridsAdHocManagement() {
-        return new DefaultWebServiceTemplateFactory.Builder().setMarshaller(this.microgridsAdHocManagementMarshaller())
+    public DefaultWebServiceTemplateFactory webServiceTemplateFactoryDistributionAutomationAdHocManagement() {
+        return new DefaultWebServiceTemplateFactory.Builder().setMarshaller(this.distributionautomationAdHocManagementMarshaller())
                 .setMessageFactory(this.messageFactory())
-                .setTargetUri(this.baseUri.concat(this.webserviceTemplateDefaultUriMicrogridsAdHocManagement))
+                .setTargetUri(this.baseUri.concat(this.webserviceTemplateDefaultUriDistributionAutomationAdHocManagement))
                 .setKeyStoreType(this.webserviceKeystoreType).setKeyStoreLocation(this.webserviceKeystoreLocation)
                 .setKeyStorePassword(this.webserviceKeystorePassword)
                 .setTrustStoreFactory(this.webServiceTrustStoreFactory()).setApplicationName(this.applicationName)
@@ -37,29 +37,29 @@ public class MicrogridsAdhocManagementWebServiceConfig extends BaseWebServiceCon
     }
 
     /**
-     * Method for creating the Marshaller for Microgrids AdHocManagement.
+     * Method for creating the Marshaller for DistributionAutomation AdHocManagement.
      *
      * @return Jaxb2Marshaller
      */
     @Bean
-    public Jaxb2Marshaller microgridsAdHocManagementMarshaller() {
+    public Jaxb2Marshaller distributionautomationAdHocManagementMarshaller() {
         final Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 
-        marshaller.setContextPath(this.contextPathMicrogridsAdHocManagement);
+        marshaller.setContextPath(this.contextPathDistributionAutomationAdHocManagement);
 
         return marshaller;
     }
 
     /**
      * Method for creating the Marshalling Payload Method Processor for
-     * Microgrids AdHocManagement.
+     * DistributionAutomation AdHocManagement.
      *
      * @return MarshallingPayloadMethodProcessor
      */
     @Bean
-    public MarshallingPayloadMethodProcessor microgridsAdHocManagementMarshallingPayloadMethodProcessor() {
-        return new MarshallingPayloadMethodProcessor(this.microgridsAdHocManagementMarshaller(),
-                this.microgridsAdHocManagementMarshaller());
+    public MarshallingPayloadMethodProcessor distributionautomationAdHocManagementMarshallingPayloadMethodProcessor() {
+        return new MarshallingPayloadMethodProcessor(this.distributionautomationAdHocManagementMarshaller(),
+                this.distributionautomationAdHocManagementMarshaller());
     }
 
 }

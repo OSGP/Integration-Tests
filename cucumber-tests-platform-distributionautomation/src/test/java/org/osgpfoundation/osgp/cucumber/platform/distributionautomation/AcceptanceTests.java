@@ -7,7 +7,7 @@
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  */
-package com.alliander.osgp.cucumber.platform.microgrids;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation;
 
 import org.junit.runner.RunWith;
 
@@ -16,11 +16,25 @@ import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/features", tags = { "~@Skip" }, glue = {
+@CucumberOptions(
+        features = "src/test/resources",
+        tags = {
+                "~@Skip"
+        },
+        glue = {
         "classpath:com.alliander.osgp.cucumber.platform.glue",
-        "classpath:com.alliander.osgp.cucumber.platform.microgrids.glue" }, plugin = { "pretty",
-                "html:target/output/Cucumber-report", "html:target/output/Cucumber-html-report.html",
-                "json:target/output/cucumber.json" }, snippets = SnippetType.CAMELCASE, dryRun = false)
+        "classpath:org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue"
+        },
+        plugin = {
+                "pretty",
+                "html:target/output/Cucumber-report",
+                "html:target/output/Cucumber-html-report.html",
+                "json:target/output/cucumber.json"
+        },
+        snippets = SnippetType.CAMELCASE,
+        dryRun = false
+)
+
 public class AcceptanceTests {
 
 }

@@ -5,7 +5,7 @@
  * use this file except in compliance with the License.
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  */
-package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.steps.ws.microgrids.notification;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.steps.ws.distributionautomation.notification;
 
 import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.NotificationService;
 import org.junit.Assert;

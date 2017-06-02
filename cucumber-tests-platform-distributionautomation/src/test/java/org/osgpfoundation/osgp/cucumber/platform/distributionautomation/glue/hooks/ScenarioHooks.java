@@ -5,13 +5,13 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package com.alliander.osgp.cucumber.platform.microgrids.glue.hooks;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.hooks;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alliander.osgp.cucumber.core.GlueBase;
 import com.alliander.osgp.cucumber.core.ScenarioContext;
-import com.alliander.osgp.cucumber.platform.microgrids.database.Database;
+import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.database.Database;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;

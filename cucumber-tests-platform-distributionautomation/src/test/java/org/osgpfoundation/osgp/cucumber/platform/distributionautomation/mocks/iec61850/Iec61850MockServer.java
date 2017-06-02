@@ -5,7 +5,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package com.alliander.osgp.cucumber.platform.microgrids.mocks.iec61850;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.mocks.iec61850;
 
 import java.io.IOException;
 import java.io.InputStream;

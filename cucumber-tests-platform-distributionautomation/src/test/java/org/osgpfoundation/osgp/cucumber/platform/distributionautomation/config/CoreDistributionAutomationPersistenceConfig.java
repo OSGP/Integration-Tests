@@ -21,12 +21,12 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import com.alliander.osgp.cucumber.platform.config.ApplicationPersistenceConfiguration;
 import com.alliander.osgp.domain.core.repositories.DeviceRepository;
-import com.alliander.osgp.domain.microgrids.repositories.RtuDeviceRepository;
+import org.osgpfoundation.osgp.domain.da.repositories.RtuDeviceRepository;
 
 @Configuration
-@EnableJpaRepositories(entityManagerFactoryRef = "entityMgrCoreMicrogrids", transactionManagerRef = "txMgrCoreMicrogrids", basePackageClasses = {
+@EnableJpaRepositories(entityManagerFactoryRef = "entityMgrCoreDistributionAutomation", transactionManagerRef = "txMgrCoreDistributionAutomation", basePackageClasses = {
         DeviceRepository.class, RtuDeviceRepository.class })
-public class CoreMicrogridsPersistenceConfig extends ApplicationPersistenceConfiguration {
+public class CoreDistributionAutomationPersistenceConfig extends ApplicationPersistenceConfiguration {
 
     @Value("${db.name.osgp_core}")
     private String databaseName;
@@ -34,7 +34,7 @@ public class CoreMicrogridsPersistenceConfig extends ApplicationPersistenceConfi
     @Value("${entitymanager.packages.to.scan.core}")
     private String entitymanagerPackagesToScan;
 
-    public CoreMicrogridsPersistenceConfig() {
+    public CoreDistributionAutomationPersistenceConfig() {
     }
 
     /**
@@ -43,7 +43,7 @@ public class CoreMicrogridsPersistenceConfig extends ApplicationPersistenceConfi
      * @return DataSource
      */
     @Primary
-    @Bean(name = "dsCoreMicrogrids")
+    @Bean(name = "dsCoreDistributionAutomation")
     public DataSource dataSource() {
         return this.makeDataSource();
     }
@@ -56,11 +56,11 @@ public class CoreMicrogridsPersistenceConfig extends ApplicationPersistenceConfi
      *             when class not found
      */
     @Primary
-    @Bean(name = "entityMgrCoreMicrogrids")
-    public LocalContainerEntityManagerFactoryBean entityMgrCoreMicrogrids(
-            @Qualifier("dsCoreMicrogrids") final DataSource dataSource) throws ClassNotFoundException {
+    @Bean(name = "entityMgrCoreDistributionAutomation")
+    public LocalContainerEntityManagerFactoryBean entityMgrCoreDistributionAutomation(
+            @Qualifier("dsCoreDistributionAutomation") final DataSource dataSource) throws ClassNotFoundException {
 
-        return this.makeEntityManager("OSGP_CUCUMBER_CORE_MICROGRIDS", dataSource);
+        return this.makeEntityManager("OSGP_CUCUMBER_CORE_DISTRIBUTIONAUTOMATION", dataSource);
     }
 
     @Override
@@ -81,9 +81,9 @@ public class CoreMicrogridsPersistenceConfig extends ApplicationPersistenceConfi
      *             when class not found
      */
     @Primary
-    @Bean(name = "txMgrCoreMicrogrids")
-    public JpaTransactionManager txMgrCoreMicrogrids(
-            @Qualifier("entityMgrCoreMicrogrids") final EntityManagerFactory entityManagerFactory)
+    @Bean(name = "txMgrCoreDistributionAutomation")
+    public JpaTransactionManager txMgrCoreDistributionAutomation(
+            @Qualifier("entityMgrCoreDistributionAutomation") final EntityManagerFactory entityManagerFactory)
             throws ClassNotFoundException {
 
         return new JpaTransactionManager(entityManagerFactory);

@@ -5,7 +5,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.steps.database.adapterprotocolie61850;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.steps.database.adapterprotocoliec61850;
 
 import static com.alliander.osgp.cucumber.core.Helpers.getInteger;
 import static com.alliander.osgp.cucumber.core.Helpers.getString;
@@ -49,7 +49,7 @@ public class Iec61850DeviceSteps extends GlueBase {
             });
 
     @Autowired
-    private Iec61850DeviceRepository iec61850DeviceRespository;
+    private Iec61850DeviceRepository iec61850DeviceRepository;
 
     @Autowired
     private Iec61850MockServerConfig iec61850MockServerConfig;
@@ -92,6 +92,6 @@ public class Iec61850DeviceSteps extends GlueBase {
         iec61850Device.setPort(getInteger(settings, PlatformDistributionAutomationKeys.KEY_IEC61850_PORT));
         iec61850Device.setServerName(getString(settings, PlatformDistributionAutomationKeys.KEY_IEC61850_SERVERNAME));
 
-        this.iec61850DeviceRespository.save(iec61850Device);
+        this.iec61850DeviceRepository.save(iec61850Device);
     }
 }

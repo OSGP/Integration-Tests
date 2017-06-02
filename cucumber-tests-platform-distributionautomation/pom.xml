@@ -5,7 +5,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.alliander</groupId>
+  <groupId>org.osgpfoundation.osgp</groupId>
   <artifactId>cucumber-tests-platform-distributionautomation</artifactId>
   <packaging>jar</packaging>
   <name>cucumber-tests-platform-distributionautomation</name>
@@ -29,10 +29,6 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.smartbear.soapui</groupId>
-      <artifactId>soapui-maven-plugin</artifactId>
     </dependency>
     <dependency>
       <groupId>jgoodies</groupId>
@@ -102,20 +98,6 @@
 
     <!-- OSGP -->
     <dependency>
-      <groupId>com.alliander.osgp</groupId>
-      <artifactId>osgp-dto</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.alliander.osgp</groupId>
-      <artifactId>shared</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.alliander.osgp</groupId>
-      <artifactId>osgp-protocol-adapter-iec61850</artifactId>
-      <classifier>classes</classifier>
-    </dependency>
-    <dependency>
       <groupId>org.osgpfoundation.osgp</groupId>
       <artifactId>osgp-adapter-ws-distributionautomation</artifactId>
       <classifier>classes</classifier>
@@ -132,10 +114,22 @@
     </dependency>
     <dependency>
       <groupId>com.alliander.osgp</groupId>
+      <artifactId>osgp-protocol-adapter-iec61850</artifactId>
+      <classifier>classes</classifier>
+    </dependency>
+    <dependency>
+      <groupId>com.alliander.osgp</groupId>
       <artifactId>osgp-protocol-simulator-iec61850</artifactId>
     </dependency>
 
-    <!-- Automatic tests platform -->
+    <!-- test -->
+    <dependency>
+      <groupId>com.alliander.osgp</groupId>
+      <artifactId>osgp-adapter-ws-microgrids</artifactId>
+      <classifier>classes</classifier>
+    </dependency>
+
+    <!-- OSGP Cucumber -->
     <dependency>
       <groupId>com.alliander</groupId>
       <artifactId>cucumber-tests-core</artifactId>
@@ -146,13 +140,6 @@
       <artifactId>cucumber-tests-platform</artifactId>
       <type>test-jar</type>
     </dependency>
-    
-
-    <dependency>
-      <groupId>ma.glasnost.orika</groupId>
-      <artifactId>orika-core</artifactId>
-    </dependency>
-
   </dependencies>
 
   <build>
@@ -164,10 +151,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>com.smartbear.soapui</groupId>
-        <artifactId>soapui-maven-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

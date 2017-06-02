@@ -5,21 +5,23 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package com.alliander.osgp.cucumber.platform.microgrids.glue.steps.database.core;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.steps.database.core;
 
 import static com.alliander.osgp.cucumber.core.Helpers.getString;
 
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alliander.osgp.cucumber.platform.PlatformKeys;
 import com.alliander.osgp.cucumber.platform.glue.steps.database.core.BaseDeviceSteps;
 import com.alliander.osgp.domain.core.entities.Device;
 import com.alliander.osgp.domain.core.repositories.DeviceRepository;
-import com.alliander.osgp.domain.microgrids.entities.RtuDevice;
-import com.alliander.osgp.domain.microgrids.repositories.RtuDeviceRepository;
+
+import org.osgpfoundation.osgp.domain.da.entities.RtuDevice;
+import org.osgpfoundation.osgp.domain.da.repositories.RtuDeviceRepository;
 
 import cucumber.api.java.en.Given;
 
@@ -35,7 +37,7 @@ public class RtuDeviceSteps extends BaseDeviceSteps {
     private DeviceRepository deviceRespository;
 
     @Given("^an rtu device$")
-    @Transactional("txMgrCoreMicrogrids")
+    @Transactional("txMgrCoreDistributionAutomation")
     public RtuDevice anRtuDevice(final Map<String, String> settings) throws Throwable {
 
         final String deviceIdentification = getString(settings, PlatformKeys.KEY_DEVICE_IDENTIFICATION);

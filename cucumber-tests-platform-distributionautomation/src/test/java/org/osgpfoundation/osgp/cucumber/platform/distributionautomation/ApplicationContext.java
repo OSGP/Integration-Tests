@@ -5,7 +5,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package com.alliander.osgp.cucumber.platform.microgrids;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation;
 
 public class ApplicationContext extends com.alliander.osgp.cucumber.platform.ApplicationContext {
 

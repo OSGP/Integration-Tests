@@ -5,14 +5,14 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package com.alliander.osgp.cucumber.platform.microgrids.glue.steps.mocks;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.steps.mocks;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alliander.osgp.cucumber.core.GlueBase;
-import com.alliander.osgp.cucumber.platform.microgrids.mocks.iec61850.Iec61850MockServer;
+import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.mocks.iec61850.Iec61850MockServer;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

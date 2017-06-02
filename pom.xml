@@ -45,6 +45,7 @@
     <module>Shared/osgp-ws-publiclighting</module>
     <module>Shared/osgp-ws-tariffswitching</module>
     <module>Shared/osgp-ws-smartmetering</module>
+    <module>Shared/osgp-ws-distributionautomation</module>
 
     <!-- Protocol-Adapter-IEC61850 -->
     <module>Protocol-Adapter-IEC61850/osgp-iec61850</module>
@@ -69,15 +70,16 @@
     <module>Platform/osgp-domain-core</module>
     <module>Platform/osgp-domain-logging</module>
     <module>Platform/osgp-domain-microgrids</module>
+    <module>Platform/osgp-domain-distributionautomation</module>
 
     <module>Platform/osgp-adapter-domain-shared</module>
-
     <module>Platform/osgp-adapter-domain-admin</module>
     <module>Platform/osgp-adapter-domain-core</module>
     <module>Platform/osgp-adapter-domain-microgrids</module>
     <module>Platform/osgp-adapter-domain-publiclighting</module>
     <module>Platform/osgp-adapter-domain-tariffswitching</module>
     <module>Platform/osgp-adapter-domain-smartmetering</module>
+    <module>Platform/osgp-adapter-domain-distributionautomation</module>
 
     <module>Platform/osgp-adapter-ws-shared</module>
     <module>Platform/osgp-adapter-ws-shared-db</module>
@@ -88,6 +90,7 @@
     <module>Platform/osgp-adapter-ws-tariffswitching</module>
     <module>Platform/osgp-adapter-ws-smartmetering</module>
     <module>Platform/osgp-adapter-ws-microgrids</module>
+    <module>Platform/osgp-adapter-ws-distributionautomation</module>
 
     <module>Platform/osgp-core</module>
     <module>Platform/osgp-logging</module>
@@ -99,6 +102,7 @@
     <module>cucumber-tests-platform-publiclighting</module>
     <module>cucumber-tests-platform-smartmetering</module>
     <module>cucumber-tests-platform-microgrids</module>
+    <module>cucumber-tests-platform-distributionautomation</module>
 
   </modules>
 </project>

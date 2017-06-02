@@ -169,6 +169,12 @@
       </dependency>
 
       <dependency>
+        <groupId>org.osgpfoundation.osgp</groupId>
+        <artifactId>osgp-domain-distributionautomation</artifactId>
+        <version>${osgp.version}</version>
+      </dependency>
+
+      <dependency>
         <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-adapter-ws-admin</artifactId>
         <version>${osgp.version}</version>
@@ -215,6 +221,12 @@
         <classifier>classes</classifier>
       </dependency>
       <dependency>
+        <groupId>org.osgpfoundation.osgp</groupId>
+        <artifactId>osgp-adapter-ws-distributionautomation</artifactId>
+        <version>${osgp.version}</version>
+        <classifier>classes</classifier>
+      </dependency>
+      <dependency>
         <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-adapter-domain-shared</artifactId>
         <version>${osgp.version}</version>
@@ -253,6 +265,12 @@
       <dependency>
         <groupId>com.alliander.osgp</groupId>
         <artifactId>osgp-adapter-domain-smartmetering</artifactId>
+        <version>${osgp.version}</version>
+        <classifier>classes</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.foundation.osgp</groupId>
+        <artifactId>osgp-adapter-domain-distributionautomation</artifactId>
         <version>${osgp.version}</version>
         <classifier>classes</classifier>
       </dependency>

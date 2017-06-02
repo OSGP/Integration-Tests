@@ -34,3 +34,6 @@ local.properties
 .buildpath
 
 **/.directory
+
+# IntelliJ
+*.iml

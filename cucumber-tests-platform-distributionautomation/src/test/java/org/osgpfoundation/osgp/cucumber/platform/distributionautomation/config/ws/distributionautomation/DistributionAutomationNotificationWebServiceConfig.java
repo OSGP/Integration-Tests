@@ -5,7 +5,7 @@
  * use this file except in compliance with the License.
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  */
-package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config.ws.microgrids;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config.ws.distributionautomation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,29 +33,29 @@ import org.springframework.ws.transport.http.WebServiceMessageReceiverHttpHandle
 import com.alliander.osgp.adapter.ws.endpointinterceptors.AnnotationMethodArgumentResolver;
 import com.alliander.osgp.adapter.ws.endpointinterceptors.OrganisationIdentification;
 import com.alliander.osgp.adapter.ws.endpointinterceptors.SoapHeaderEndpointInterceptor;
-import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config.PlatformMicrogridsConfiguration;
+import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config.PlatformDistributionAutomationConfiguration;
 import com.sun.net.httpserver.HttpHandler;
 
 @EnableWs
-public class MicrogridsNotificationWebServiceConfig extends WsConfigurerAdapter {
+public class DistributionAutomationNotificationWebServiceConfig extends WsConfigurerAdapter {
 
     private static final String ORGANISATION_IDENTIFICATION_HEADER = "OrganisationIdentification";
 
     @Autowired
-    private PlatformMicrogridsConfiguration configuration;
+    private PlatformDistributionAutomationConfiguration configuration;
 
     @Bean
     public DefaultMethodEndpointAdapter defaultMethodEndpointAdapter() {
         final DefaultMethodEndpointAdapter defaultMethodEndpointAdapter = new DefaultMethodEndpointAdapter();
 
         final List<MethodArgumentResolver> methodArgumentResolvers = new ArrayList<>();
-        methodArgumentResolvers.add(this.microgridsNotificationMarshallingPayloadMethodProcessor());
+        methodArgumentResolvers.add(this.distributionautomationNotificationMarshallingPayloadMethodProcessor());
         methodArgumentResolvers.add(new AnnotationMethodArgumentResolver(ORGANISATION_IDENTIFICATION_HEADER,
                 OrganisationIdentification.class));
         defaultMethodEndpointAdapter.setMethodArgumentResolvers(methodArgumentResolvers);
 
         final List<MethodReturnValueHandler> methodReturnValueHandlers = new ArrayList<>();
-        methodReturnValueHandlers.add(this.microgridsNotificationMarshallingPayloadMethodProcessor());
+        methodReturnValueHandlers.add(this.distributionautomationNotificationMarshallingPayloadMethodProcessor());
         defaultMethodEndpointAdapter.setMethodReturnValueHandlers(methodReturnValueHandlers);
 
         return defaultMethodEndpointAdapter;
@@ -96,28 +96,28 @@ public class MicrogridsNotificationWebServiceConfig extends WsConfigurerAdapter 
     }
 
     /**
-     * Method for creating the Marshaller for Microgrids notification.
+     * Method for creating the Marshaller for DistributionAutomation notification.
      *
      * @return Jaxb2Marshaller
      */
     @Bean
-    public Jaxb2Marshaller microgridsNotificationMarshaller() {
+    public Jaxb2Marshaller distributionautomationNotificationMarshaller() {
         final Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 
-        marshaller.setContextPath(this.configuration.getContextPathMicrogridsNotification());
+        marshaller.setContextPath(this.configuration.getContextPathDistributionAutomationNotification());
 
         return marshaller;
     }
 
     /**
      * Method for creating the Marshalling Payload Method Processor for
-     * Microgrids notification.
+     * DistributionAutomation notification.
      *
      * @return MarshallingPayloadMethodProcessor
      */
     @Bean
-    public MarshallingPayloadMethodProcessor microgridsNotificationMarshallingPayloadMethodProcessor() {
-        return new MarshallingPayloadMethodProcessor(this.microgridsNotificationMarshaller(),
-                this.microgridsNotificationMarshaller());
+    public MarshallingPayloadMethodProcessor distributionautomationNotificationMarshallingPayloadMethodProcessor() {
+        return new MarshallingPayloadMethodProcessor(this.distributionautomationNotificationMarshaller(),
+                this.distributionautomationNotificationMarshaller());
     }
 }

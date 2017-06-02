@@ -5,7 +5,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.microgrids.adhocmanagement;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.adhocmanagement;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -16,15 +16,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
-import com.alliander.osgp.adapter.ws.microgrids.domain.repositories.RtuResponseDataRepository;
-import com.alliander.osgp.adapter.ws.schema.microgrids.adhocmanagement.GetDataAsyncRequest;
-import com.alliander.osgp.adapter.ws.schema.microgrids.adhocmanagement.GetDataAsyncResponse;
-import com.alliander.osgp.adapter.ws.schema.microgrids.adhocmanagement.GetDataRequest;
-import com.alliander.osgp.adapter.ws.schema.microgrids.adhocmanagement.GetDataResponse;
-import com.alliander.osgp.adapter.ws.schema.microgrids.adhocmanagement.SetDataAsyncRequest;
-import com.alliander.osgp.adapter.ws.schema.microgrids.adhocmanagement.SetDataAsyncResponse;
-import com.alliander.osgp.adapter.ws.schema.microgrids.adhocmanagement.SetDataRequest;
-import com.alliander.osgp.adapter.ws.schema.microgrids.adhocmanagement.SetDataResponse;
+import org.osgpfoundation.osgp.adapter.ws.da.domain.repositories.RtuResponseDataRepository;
+
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetPQValuesAsyncRequest;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetPQValuesAsyncResponse;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetPQValuesRequest;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetPQValuesResponse;
+
 import com.alliander.osgp.cucumber.platform.support.ws.BaseClient;
 import com.alliander.osgp.shared.exceptionhandling.WebServiceSecurityException;
 import com.alliander.osgp.shared.infra.ws.DefaultWebServiceTemplateFactory;
@@ -33,8 +31,8 @@ import com.alliander.osgp.shared.infra.ws.DefaultWebServiceTemplateFactory;
 public class AdHocManagementClient extends BaseClient {
 
     @Autowired
-    @Qualifier("webServiceTemplateFactoryMicrogridsAdHocManagement")
-    private DefaultWebServiceTemplateFactory webServiceTemplateFactoryMicrogridsAdHocManagement;
+    @Qualifier("webServiceTemplateFactoryDistributionAutomationAdHocManagement")
+    private DefaultWebServiceTemplateFactory webServiceTemplateFactoryDistributionAutomationAdHocManagement;
 
     @Autowired
     private RtuResponseDataRepository rtuResponseDataRepository;
@@ -44,40 +42,22 @@ public class AdHocManagementClient extends BaseClient {
     @Value("${iec61850.rtu.response.wait.fail.duration:15000}")
     private int waitFailMillis;
 
-    public GetDataAsyncResponse getDataAsync(final GetDataRequest request)
+    public GetPQValuesAsyncResponse getDataAsync(final GetPQValuesRequest request)
             throws WebServiceSecurityException, GeneralSecurityException, IOException {
-        final WebServiceTemplate webServiceTemplate = this.webServiceTemplateFactoryMicrogridsAdHocManagement
+        final WebServiceTemplate webServiceTemplate = this.webServiceTemplateFactoryDistributionAutomationAdHocManagement
                 .getTemplate(this.getOrganizationIdentification(), this.getUserName());
-        return (GetDataAsyncResponse) webServiceTemplate.marshalSendAndReceive(request);
+        return (GetPQValuesAsyncResponse) webServiceTemplate.marshalSendAndReceive(request);
     }
 
-    public SetDataAsyncResponse setDataAsync(final SetDataRequest request)
-            throws WebServiceSecurityException, GeneralSecurityException, IOException {
-        final WebServiceTemplate webServiceTemplate = this.webServiceTemplateFactoryMicrogridsAdHocManagement
-                .getTemplate(this.getOrganizationIdentification(), this.getUserName());
-        return (SetDataAsyncResponse) webServiceTemplate.marshalSendAndReceive(request);
-    }
-
-    public GetDataResponse getData(final GetDataAsyncRequest request)
+    public GetPQValuesResponse getData(final GetPQValuesAsyncRequest request)
             throws WebServiceSecurityException, GeneralSecurityException, IOException {
 
         final String correlationUid = request.getAsyncRequest().getCorrelationUid();
         this.waitForRtuResponseData(correlationUid);
 
-        final WebServiceTemplate webServiceTemplate = this.webServiceTemplateFactoryMicrogridsAdHocManagement
+        final WebServiceTemplate webServiceTemplate = this.webServiceTemplateFactoryDistributionAutomationAdHocManagement
                 .getTemplate(this.getOrganizationIdentification(), this.getUserName());
-        return (GetDataResponse) webServiceTemplate.marshalSendAndReceive(request);
-    }
-
-    public SetDataResponse setData(final SetDataAsyncRequest request)
-            throws WebServiceSecurityException, GeneralSecurityException, IOException {
-
-        final String correlationUid = request.getAsyncRequest().getCorrelationUid();
-        this.waitForRtuResponseData(correlationUid);
-
-        final WebServiceTemplate webServiceTemplate = this.webServiceTemplateFactoryMicrogridsAdHocManagement
-                .getTemplate(this.getOrganizationIdentification(), this.getUserName());
-        return (SetDataResponse) webServiceTemplate.marshalSendAndReceive(request);
+        return (GetPQValuesResponse) webServiceTemplate.marshalSendAndReceive(request);
     }
 
     private void waitForRtuResponseData(final String correlationUid) {

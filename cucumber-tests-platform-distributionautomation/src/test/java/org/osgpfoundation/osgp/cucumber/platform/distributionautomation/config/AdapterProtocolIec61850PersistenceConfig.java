@@ -5,7 +5,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package com.alliander.osgp.cucumber.platform.microgrids.config;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;

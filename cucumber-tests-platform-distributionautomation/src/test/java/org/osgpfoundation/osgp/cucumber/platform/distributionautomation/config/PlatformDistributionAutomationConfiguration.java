@@ -15,13 +15,13 @@ import org.springframework.context.annotation.PropertySources;
 import com.alliander.osgp.cucumber.platform.config.AbstractPlatformApplicationConfiguration;
 
 @Configuration
-@PropertySources({ @PropertySource("classpath:cucumber-tests-platform-microgrids.properties"),
+@PropertySources({ @PropertySource("classpath:cucumber-tests-platform-distributionautomation.properties"),
         @PropertySource(value = "file:/etc/osp/test/global-cucumber.properties", ignoreResourceNotFound = true),
-        @PropertySource(value = "file:/etc/osp/test/cucumber-tests-platform-microgrids.properties", ignoreResourceNotFound = true), })
-public class PlatformMicrogridsConfiguration extends AbstractPlatformApplicationConfiguration {
+        @PropertySource(value = "file:/etc/osp/test/cucumber-tests-platform-distributionautomation.properties", ignoreResourceNotFound = true), })
+public class PlatformDistributionAutomationConfiguration extends AbstractPlatformApplicationConfiguration {
 
-    @Value("${jaxb2.marshaller.context.path.microgrids.notification}")
-    private String contextPathMicrogridsNotification;
+    @Value("${jaxb2.marshaller.context.path.distributionautomation.notification}")
+    private String contextPathDistributionAutomationNotification;
 
     @Value("${web.service.notification.context}")
     private String notificationsContextPath;
@@ -29,8 +29,8 @@ public class PlatformMicrogridsConfiguration extends AbstractPlatformApplication
     @Value("${web.service.notification.port}")
     private int notificationsPort;
 
-    public String getContextPathMicrogridsNotification() {
-        return this.contextPathMicrogridsNotification;
+    public String getContextPathDistributionAutomationNotification() {
+        return this.contextPathDistributionAutomationNotification;
     }
 
     public String getNotificationsContextPath() {

@@ -7,7 +7,7 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.endpoints;
 
-import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.microgrids.NotificationService;
+import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +17,24 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.alliander.osgp.adapter.ws.endpointinterceptors.OrganisationIdentification;
-import com.alliander.osgp.adapter.ws.schema.microgrids.notification.SendNotificationRequest;
-import com.alliander.osgp.adapter.ws.schema.microgrids.notification.SendNotificationResponse;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.SendNotificationRequest;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.SendNotificationResponse;
 import com.alliander.osgp.shared.exceptionhandling.WebServiceException;
 
 @Endpoint
-public class MicrogridsNotificationEndpoint {
+public class DistributionAutomationNotificationEndpoint {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MicrogridsNotificationEndpoint.class);
-    private static final String MICROGRIDS_NOTIFICATION_NAMESPACE = "http://www.alliander.com/schemas/osgp/microgrids/notification/2016/06";
+    private static final Logger LOGGER = LoggerFactory.getLogger(DistributionAutomationNotificationEndpoint.class);
+    private static final String  DISTRIBUTIONAUTOMATION_NOTIFICATION_NAMESPACE = "http://www.osgpfoundation.org/schemas/osgp/distributionautomation/notification/2016/06";
 
     @Autowired
     private NotificationService notificationService;
 
-    public MicrogridsNotificationEndpoint() {
+    public DistributionAutomationNotificationEndpoint() {
         // Default constructor
     }
 
-    @PayloadRoot(localPart = "SendNotificationRequest", namespace = MICROGRIDS_NOTIFICATION_NAMESPACE)
+    @PayloadRoot(localPart = "SendNotificationRequest", namespace = DISTRIBUTIONAUTOMATION_NOTIFICATION_NAMESPACE)
     @ResponsePayload
     public SendNotificationResponse sendNotification(
             @OrganisationIdentification final String organisationIdentification,

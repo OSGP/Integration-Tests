@@ -9,6 +9,6 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation;
 
-public class PlatformMicrogridsDefaults extends com.alliander.osgp.cucumber.platform.PlatformDefaults {
+public class PlatformDistributionAutomationDefaults extends com.alliander.osgp.cucumber.platform.PlatformDefaults {
 
 }

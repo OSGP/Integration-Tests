@@ -5,7 +5,7 @@
  * use this file except in compliance with the License.
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  */
-package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.microgrids;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.alliander.osgp.adapter.ws.schema.microgrids.notification.Notification;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.Notification;
 
 @Component
 public class NotificationService {

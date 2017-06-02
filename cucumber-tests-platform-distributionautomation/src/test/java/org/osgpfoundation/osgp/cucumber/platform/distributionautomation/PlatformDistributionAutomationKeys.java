@@ -9,6 +9,6 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation;
 
-public class PlatformMicrogridsKeys extends com.alliander.osgp.cucumber.platform.PlatformKeys {
+public class PlatformDistributionAutomationKeys extends com.alliander.osgp.cucumber.platform.PlatformKeys {
 
 }

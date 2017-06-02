@@ -5,7 +5,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.adhocmanagement;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.getpqvalues;
 
 import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetPQValuesAsyncRequest;
 import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetPQValuesRequest;
