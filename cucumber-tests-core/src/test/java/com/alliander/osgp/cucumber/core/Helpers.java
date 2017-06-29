@@ -7,6 +7,7 @@
  */
 package com.alliander.osgp.cucumber.core;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -17,6 +18,9 @@ import org.apache.commons.codec.binary.Hex;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.luckycatlabs.sunrisesunset.SunriseSunsetCalculator;
+import com.luckycatlabs.sunrisesunset.dto.Location;
 
 public class Helpers {
 
@@ -168,6 +172,10 @@ public class Helpers {
                     + "], expected the string to begin with tomorrow, yesterday or now or today");
         }
 
+        // Normalize the seconds and milliseconds to zero
+        retval = retval.withSecondOfMinute(0);
+        retval = retval.withMillisOfSecond(0);
+
         if (whenMatcher.groupCount() > 1 && whenMatcher.group(2).equals("at")) {
 
             switch (whenMatcher.group(3)) {
@@ -247,6 +255,42 @@ public class Helpers {
             return defaultStartDate;
         }
         return dateTime;
+    }
+
+    /**
+     * Get time of sunrise/sunset
+     *
+     * @param actionTimeType
+     * @param date
+     * @param location
+     * @return DateTime
+     * @throws Exception
+     */
+    public static DateTime getSunriseSunsetTime(final String actionTimeType, final DateTime date,
+            final Location location) {
+        final SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(location, "UTC");
+
+        Calendar officialTransition = null;
+
+        final Calendar calender = Calendar.getInstance();
+
+        if (actionTimeType.equalsIgnoreCase("SUNSET")) {
+            calender.setTime(date.toDate());
+            officialTransition = calculator.getOfficialSunsetCalendarForDate(calender);
+        } else if (actionTimeType.equalsIgnoreCase("SUNRISE")) {
+            calender.setTime(date.plusDays(1).toDate());
+            officialTransition = calculator.getOfficialSunriseCalendarForDate(calender);
+        }
+
+        if (officialTransition == null) {
+            return null;
+        }
+
+        return new DateTime(officialTransition.getTimeInMillis());
+    }
+
+    public static Location getCurrentLocationByLatitudeAndLongitude(final double latitude, final double longitude) {
+        return new Location(latitude, longitude);
     }
 
     public static <E extends Enum<E>> E getEnum(final Map<String, String> settings, final String key,
