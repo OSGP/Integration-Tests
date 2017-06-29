@@ -5,16 +5,16 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.adhocmanagement;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.devicemanagement;
 
 import com.alliander.osgp.cucumber.platform.support.ws.BaseClient;
 import com.alliander.osgp.shared.exceptionhandling.WebServiceSecurityException;
 import com.alliander.osgp.shared.infra.ws.DefaultWebServiceTemplateFactory;
 import org.osgpfoundation.osgp.adapter.ws.da.domain.repositories.RtuResponseDataRepository;
-import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetDeviceModelAsyncRequest;
-import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetDeviceModelAsyncResponse;
-import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetDeviceModelRequest;
-import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetDeviceModelResponse;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetHealthStatusAsyncRequest;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetHealthStatusAsyncResponse;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetHealthStatusRequest;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetHealthStatusResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,11 +25,11 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 @Component
-public class AdHocManagementClient extends BaseClient {
+public class DeviceManagementClient extends BaseClient {
 
     @Autowired
-    @Qualifier("webServiceTemplateFactoryDistributionAutomationAdHocManagement")
-    private DefaultWebServiceTemplateFactory webServiceTemplateFactoryDistributionAutomationAdHocManagement;
+    @Qualifier("webServiceTemplateFactoryDistributionAutomationDeviceManagement")
+    private DefaultWebServiceTemplateFactory webServiceTemplateFactoryDistributionAutomationDeviceManagement;
 
     @Autowired
     private RtuResponseDataRepository rtuResponseDataRepository;
@@ -39,22 +39,22 @@ public class AdHocManagementClient extends BaseClient {
     @Value("${iec61850.rtu.response.wait.fail.duration:15000}")
     private int waitFailMillis;
 
-    public GetDeviceModelAsyncResponse getDeviceModelAsyncResponse(final GetDeviceModelRequest request)
+    public GetHealthStatusAsyncResponse getHealthStatusAsyncResponse(final GetHealthStatusRequest request)
             throws WebServiceSecurityException, GeneralSecurityException, IOException {
-        final WebServiceTemplate webServiceTemplate = this.webServiceTemplateFactoryDistributionAutomationAdHocManagement
+        final WebServiceTemplate webServiceTemplate = this.webServiceTemplateFactoryDistributionAutomationDeviceManagement
                 .getTemplate(this.getOrganizationIdentification(), this.getUserName());
-        return (GetDeviceModelAsyncResponse) webServiceTemplate.marshalSendAndReceive(request);
+        return (GetHealthStatusAsyncResponse) webServiceTemplate.marshalSendAndReceive(request);
     }
 
-    public GetDeviceModelResponse getDeviceModelResponse(final GetDeviceModelAsyncRequest request)
+    public GetHealthStatusResponse getHealthStatusResponse(final GetHealthStatusAsyncRequest request)
             throws WebServiceSecurityException, GeneralSecurityException, IOException {
 
         final String correlationUid = request.getAsyncRequest().getCorrelationUid();
         this.waitForRtuResponseData(correlationUid);
 
-        final WebServiceTemplate webServiceTemplate = this.webServiceTemplateFactoryDistributionAutomationAdHocManagement
+        final WebServiceTemplate webServiceTemplate = this.webServiceTemplateFactoryDistributionAutomationDeviceManagement
                 .getTemplate(this.getOrganizationIdentification(), this.getUserName());
-        return (GetDeviceModelResponse) webServiceTemplate.marshalSendAndReceive(request);
+        return (GetHealthStatusResponse) webServiceTemplate.marshalSendAndReceive(request);
     }
 
     private void waitForRtuResponseData(final String correlationUid) {

@@ -7,12 +7,11 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config;
 
+import com.alliander.osgp.cucumber.platform.config.AbstractPlatformApplicationConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
-
-import com.alliander.osgp.cucumber.platform.config.AbstractPlatformApplicationConfiguration;
 
 @Configuration
 @PropertySources({ @PropertySource("classpath:cucumber-tests-platform-distributionautomation.properties"),

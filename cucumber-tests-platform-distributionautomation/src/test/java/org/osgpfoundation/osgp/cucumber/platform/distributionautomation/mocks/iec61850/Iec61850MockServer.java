@@ -7,14 +7,13 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.mocks.iec61850;
 
-import java.io.IOException;
-import java.io.InputStream;
-
+import com.alliander.osgp.simulator.protocol.iec61850.server.RtuSimulator;
 import org.openmuc.openiec61850.SclParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alliander.osgp.simulator.protocol.iec61850.server.RtuSimulator;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Iec61850MockServer {
 

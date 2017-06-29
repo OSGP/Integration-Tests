@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2015 Smart Society Services B.V. Licensed under the Apache 
+  License, Version 2.0 (the "License"); you may not use this file except in 
+  compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.alliander.osgp</groupId>
+  <artifactId>integration-tests</artifactId>
+  <version>4.13.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <!-- Description, Organization, Licences, URL and Distribution Management 
+    elements are needed for the maven-jxr-plugin to generate a maven site -->
+  <description>Integration tests for DA OSGP components.</description>
+  <organization>
+    <name>OSGP</name>
+    <url>https://osgplatform.wordpress.com</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>APACHE 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+    </license>
+  </licenses>
+  <!-- URL is passed in as a maven argument: -Dmaven.site.url=http://my/url/for/the/site -->
+  <url>${maven.site.url}</url>
+  <distributionManagement>
+    <site>
+      <id>integration-tests</id>
+      <name>integration-tests</name>
+      <!-- URL is passed in as a maven argument: -Dmaven.site.distributionManagement.site.url=file:////the/path/to/deploy/the/site/to -->
+      <url>${maven.site.distributionManagement.site.url}</url>
+    </site>
+  </distributionManagement>
+
+  <modules>
+    <!-- Shared -->
+    <module>parent-integration-tests</module>
+    <module>Shared/shared</module>
+    <module>Shared/osgp-dto</module>
+    <module>Shared/osgp-ws-core</module>
+    <module>Shared/osgp-ws-admin</module>
+    <module>Shared/osgp-ws-distributionautomation</module>
+
+    <!-- Protocol-Adapter-IEC61850 -->
+    <module>Protocol-Adapter-IEC61850/parent-pa-iec61850</module>
+    <module>Protocol-Adapter-IEC61850/osgp-iec61850</module>
+    <module>Protocol-Adapter-IEC61850/osgp-protocol-adapter-iec61850</module>
+    <module>Protocol-Adapter-IEC61850/protocol-simulator-iec61850</module>
+    <module>Protocol-Adapter-IEC61850/osgp-core-db-api-iec61850</module>
+
+    <!-- Platform -->
+    <module>Platform/osgp-domain-core</module>
+    <module>Platform/osgp-domain-logging</module>
+    <module>Platform/osgp-domain-distributionautomation</module>
+
+    <module>Platform/osgp-adapter-domain-shared</module>
+    <module>Platform/osgp-adapter-domain-core</module>
+    <module>Platform/osgp-adapter-domain-distributionautomation</module>
+
+    <module>Platform/osgp-adapter-ws-shared</module>
+    <module>Platform/osgp-adapter-ws-shared-db</module>
+
+    <module>Platform/osgp-adapter-ws-core</module>
+    <module>Platform/osgp-adapter-ws-distributionautomation</module>
+
+    <module>Platform/osgp-core</module>
+    <module>Platform/osgp-logging</module>
+
+    <!-- Automatic tests project -->
+    <module>cucumber-tests-core</module>
+    <module>cucumber-tests-platform</module>
+    <module>cucumber-tests-platform-distributionautomation</module>
+
+  </modules>
+</project>

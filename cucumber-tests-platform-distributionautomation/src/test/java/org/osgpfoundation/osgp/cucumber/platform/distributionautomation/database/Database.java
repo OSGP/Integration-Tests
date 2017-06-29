@@ -7,15 +7,13 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.database;
 
+import com.alliander.osgp.adapter.protocol.iec61850.domain.repositories.Iec61850DeviceRepository;
+import org.osgpfoundation.osgp.adapter.ws.da.domain.repositories.RtuResponseDataRepository;
+import org.osgpfoundation.osgp.domain.da.repositories.RtuDeviceRepository;
+import org.osgpfoundation.osgp.domain.da.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.alliander.osgp.adapter.protocol.iec61850.domain.repositories.Iec61850DeviceRepository;
-import org.osgpfoundation.osgp.adapter.ws.da.domain.repositories.RtuResponseDataRepository;
-
-import org.osgpfoundation.osgp.domain.da.repositories.RtuDeviceRepository;
-import org.osgpfoundation.osgp.domain.da.repositories.TaskRepository;
 
 @Component
 public class Database {

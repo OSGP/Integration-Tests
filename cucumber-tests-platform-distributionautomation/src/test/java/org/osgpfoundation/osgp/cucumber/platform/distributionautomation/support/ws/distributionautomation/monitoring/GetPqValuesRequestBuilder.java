@@ -5,26 +5,25 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.getpqvalues;
+package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.monitoring;
 
-import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetPQValuesAsyncRequest;
-import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetPQValuesRequest;
 import com.alliander.osgp.cucumber.core.ScenarioContext;
 import com.alliander.osgp.cucumber.platform.PlatformKeys;
 import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.common.AsyncRequest;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetPQValuesAsyncRequest;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.generic.GetPQValuesRequest;
 
 import java.util.Map;
 
-public class GetPqValueRequestBuilder {
+public class GetPqValuesRequestBuilder {
 
-    private GetPqValueRequestBuilder() {
+    private GetPqValuesRequestBuilder() {
         // Private constructor for utility class.
     }
 
     public static GetPQValuesRequest fromParameterMap(final Map<String, String> requestParameters) {
         final GetPQValuesRequest getPQValuesRequest = new GetPQValuesRequest();
         getPQValuesRequest.setDeviceIdentification(requestParameters.get(PlatformKeys.KEY_DEVICE_IDENTIFICATION));
-//        addSystemFilters(requestParameters, getDataRequest);
         return getPQValuesRequest;
     }
 

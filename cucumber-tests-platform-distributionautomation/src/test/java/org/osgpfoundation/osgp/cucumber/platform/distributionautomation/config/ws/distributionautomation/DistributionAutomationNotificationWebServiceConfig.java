@@ -7,13 +7,14 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config.ws.distributionautomation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.alliander.osgp.adapter.ws.endpointinterceptors.AnnotationMethodArgumentResolver;
+import com.alliander.osgp.adapter.ws.endpointinterceptors.OrganisationIdentification;
+import com.alliander.osgp.adapter.ws.endpointinterceptors.SoapHeaderEndpointInterceptor;
+import com.sun.net.httpserver.HttpHandler;
+import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config.PlatformDistributionAutomationConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.remoting.support.SimpleHttpServerFactoryBean;
 import org.springframework.ws.config.annotation.EnableWs;
@@ -30,13 +31,13 @@ import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.soap.server.SoapMessageDispatcher;
 import org.springframework.ws.transport.http.WebServiceMessageReceiverHttpHandler;
 
-import com.alliander.osgp.adapter.ws.endpointinterceptors.AnnotationMethodArgumentResolver;
-import com.alliander.osgp.adapter.ws.endpointinterceptors.OrganisationIdentification;
-import com.alliander.osgp.adapter.ws.endpointinterceptors.SoapHeaderEndpointInterceptor;
-import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config.PlatformDistributionAutomationConfiguration;
-import com.sun.net.httpserver.HttpHandler;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @EnableWs
+@Configuration
 public class DistributionAutomationNotificationWebServiceConfig extends WsConfigurerAdapter {
 
     private static final String ORGANISATION_IDENTIFICATION_HEADER = "OrganisationIdentification";

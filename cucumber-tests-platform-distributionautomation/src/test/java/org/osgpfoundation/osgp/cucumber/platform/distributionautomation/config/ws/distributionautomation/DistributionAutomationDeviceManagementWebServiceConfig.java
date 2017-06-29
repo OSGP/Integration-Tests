@@ -16,19 +16,19 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.server.endpoint.adapter.method.MarshallingPayloadMethodProcessor;
 
 @Configuration
-public class DistributionAutomationAdhocManagementWebServiceConfig extends BaseWebServiceConfig {
+public class DistributionAutomationDeviceManagementWebServiceConfig extends BaseWebServiceConfig {
 
-    @Value("${web.service.template.default.uri.distributionautomation.adhocmanagement}")
-    private String webserviceTemplateDefaultUriDistributionAutomationAdHocManagement;
+    @Value("${web.service.template.default.uri.distributionautomation.devicemanagement}")
+    private String webserviceTemplateDefaultUriDistributionAutomationDeviceManagement;
 
-    @Value("${jaxb2.marshaller.context.path.distributionautomation.adhocmanagement}")
-    private String contextPathDistributionAutomationAdHocManagement;
+    @Value("${jaxb2.marshaller.context.path.distributionautomation.devicemanagement}")
+    private String contextPathDistributionAutomationDeviceManagement;
 
     @Bean
-    public DefaultWebServiceTemplateFactory webServiceTemplateFactoryDistributionAutomationAdHocManagement() {
-        return new DefaultWebServiceTemplateFactory.Builder().setMarshaller(this.distributionautomationAdHocManagementMarshaller())
+    public DefaultWebServiceTemplateFactory webServiceTemplateFactoryDistributionAutomationDeviceManagement() {
+        return new DefaultWebServiceTemplateFactory.Builder().setMarshaller(this.distributionautomationDeviceManagementMarshaller())
                 .setMessageFactory(this.messageFactory())
-                .setTargetUri(this.baseUri.concat(this.webserviceTemplateDefaultUriDistributionAutomationAdHocManagement))
+                .setTargetUri(this.baseUri.concat(this.webserviceTemplateDefaultUriDistributionAutomationDeviceManagement))
                 .setKeyStoreType(this.webserviceKeystoreType).setKeyStoreLocation(this.webserviceKeystoreLocation)
                 .setKeyStorePassword(this.webserviceKeystorePassword)
                 .setTrustStoreFactory(this.webServiceTrustStoreFactory()).setApplicationName(this.applicationName)
@@ -36,29 +36,29 @@ public class DistributionAutomationAdhocManagementWebServiceConfig extends BaseW
     }
 
     /**
-     * Method for creating the Marshaller for DistributionAutomation AdHocManagement.
+     * Method for creating the Marshaller for DistributionAutomation DeviceManagement.
      *
      * @return Jaxb2Marshaller
      */
     @Bean
-    public Jaxb2Marshaller distributionautomationAdHocManagementMarshaller() {
+    public Jaxb2Marshaller distributionautomationDeviceManagementMarshaller() {
         final Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 
-        marshaller.setContextPath(this.contextPathDistributionAutomationAdHocManagement);
+        marshaller.setContextPath(this.contextPathDistributionAutomationDeviceManagement);
 
         return marshaller;
     }
 
     /**
      * Method for creating the Marshalling Payload Method Processor for
-     * DistributionAutomation AdHocManagement.
+     * DistributionAutomation DeviceManagement.
      *
      * @return MarshallingPayloadMethodProcessor
      */
     @Bean
-    public MarshallingPayloadMethodProcessor distributionautomationAdHocManagementMarshallingPayloadMethodProcessor() {
-        return new MarshallingPayloadMethodProcessor(this.distributionautomationAdHocManagementMarshaller(),
-                this.distributionautomationAdHocManagementMarshaller());
+    public MarshallingPayloadMethodProcessor distributionautomationDeviceManagementMarshallingPayloadMethodProcessor() {
+        return new MarshallingPayloadMethodProcessor(this.distributionautomationDeviceManagementMarshaller(),
+                this.distributionautomationDeviceManagementMarshaller());
     }
 
 }

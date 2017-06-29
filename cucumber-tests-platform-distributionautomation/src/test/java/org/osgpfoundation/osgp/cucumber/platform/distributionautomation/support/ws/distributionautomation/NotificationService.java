@@ -7,13 +7,12 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
-
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.Notification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.Notification;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Component
 public class NotificationService {

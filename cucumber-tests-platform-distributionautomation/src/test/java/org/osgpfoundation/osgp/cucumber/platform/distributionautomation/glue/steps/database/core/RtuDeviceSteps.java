@@ -7,23 +7,19 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.steps.database.core;
 
-import static com.alliander.osgp.cucumber.core.Helpers.getString;
-
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.alliander.osgp.cucumber.platform.PlatformKeys;
 import com.alliander.osgp.cucumber.platform.glue.steps.database.core.BaseDeviceSteps;
 import com.alliander.osgp.domain.core.entities.Device;
 import com.alliander.osgp.domain.core.repositories.DeviceRepository;
-
+import cucumber.api.java.en.Given;
 import org.osgpfoundation.osgp.domain.da.entities.RtuDevice;
 import org.osgpfoundation.osgp.domain.da.repositories.RtuDeviceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
-import cucumber.api.java.en.Given;
+import java.util.Map;
+
+import static com.alliander.osgp.cucumber.core.Helpers.getString;
 
 /**
  * RTU device specific steps.
@@ -31,10 +27,10 @@ import cucumber.api.java.en.Given;
 public class RtuDeviceSteps extends BaseDeviceSteps {
 
     @Autowired
-    private RtuDeviceRepository rtuDeviceRespository;
+    private RtuDeviceRepository rtuDeviceRepository;
 
     @Autowired
-    private DeviceRepository deviceRespository;
+    private DeviceRepository deviceRepository;
 
     @Given("^an rtu device$")
     @Transactional("txMgrCoreDistributionAutomation")
@@ -42,13 +38,13 @@ public class RtuDeviceSteps extends BaseDeviceSteps {
 
         final String deviceIdentification = getString(settings, PlatformKeys.KEY_DEVICE_IDENTIFICATION);
         final RtuDevice rtuDevice = new RtuDevice(deviceIdentification);
-        return this.rtuDeviceRespository.save(rtuDevice);
+        return this.rtuDeviceRepository.save(rtuDevice);
     }
 
-    @Transactional("txMgrCore")
+    @Transactional("txMgrCoreDistributionAutomation")
     public Device updateRtuDevice(final Map<String, String> settings) throws Throwable {
         return this.updateDevice(
-                this.deviceRespository.findByDeviceIdentification(getString(settings, PlatformKeys.KEY_DEVICE_IDENTIFICATION)),
+                this.deviceRepository.findByDeviceIdentification(getString(settings, PlatformKeys.KEY_DEVICE_IDENTIFICATION)),
                 settings);
     }
 }

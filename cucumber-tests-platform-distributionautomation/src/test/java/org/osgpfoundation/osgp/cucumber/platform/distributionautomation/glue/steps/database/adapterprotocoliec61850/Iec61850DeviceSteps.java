@@ -7,13 +7,12 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.steps.database.adapterprotocoliec61850;
 
-import static com.alliander.osgp.cucumber.core.Helpers.getInteger;
-import static com.alliander.osgp.cucumber.core.Helpers.getString;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.alliander.osgp.adapter.protocol.iec61850.domain.entities.Iec61850Device;
+import com.alliander.osgp.adapter.protocol.iec61850.domain.repositories.Iec61850DeviceRepository;
+import com.alliander.osgp.cucumber.core.GlueBase;
+import com.alliander.osgp.cucumber.core.ScenarioContext;
+import com.alliander.osgp.cucumber.platform.helpers.SettingsHelper;
+import cucumber.api.java.en.Given;
 import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.PlatformDistributionAutomationDefaults;
 import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.PlatformDistributionAutomationKeys;
 import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config.Iec61850MockServerConfig;
@@ -21,13 +20,12 @@ import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.ste
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alliander.osgp.adapter.protocol.iec61850.domain.entities.Iec61850Device;
-import com.alliander.osgp.adapter.protocol.iec61850.domain.repositories.Iec61850DeviceRepository;
-import com.alliander.osgp.cucumber.core.GlueBase;
-import com.alliander.osgp.cucumber.core.ScenarioContext;
-import com.alliander.osgp.cucumber.platform.helpers.SettingsHelper;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-import cucumber.api.java.en.Given;
+import static com.alliander.osgp.cucumber.core.Helpers.getInteger;
+import static com.alliander.osgp.cucumber.core.Helpers.getString;
 
 /**
  * IEC61850 specific device steps.

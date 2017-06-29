@@ -9,6 +9,11 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class PlatformDistributionAutomationDefaults extends com.alliander.osgp.cucumber.platform.PlatformDefaults {
+
+    public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
 }

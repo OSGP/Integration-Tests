@@ -7,9 +7,8 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
+import com.alliander.osgp.adapter.protocol.iec61850.domain.repositories.Iec61850DeviceRepository;
+import com.alliander.osgp.cucumber.platform.config.ApplicationPersistenceConfiguration;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +17,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
-import com.alliander.osgp.adapter.protocol.iec61850.domain.repositories.Iec61850DeviceRepository;
-import com.alliander.osgp.cucumber.platform.config.ApplicationPersistenceConfiguration;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(entityManagerFactoryRef = "entityMgrFactIec61850", transactionManagerRef = "txMgrIec61850", basePackageClasses = {

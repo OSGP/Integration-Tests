@@ -7,37 +7,29 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.steps.ws.distributionautomation.notification;
 
-import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.NotificationService;
-import org.junit.Assert;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.Notification;
 import com.alliander.osgp.cucumber.core.GlueBase;
 import com.alliander.osgp.cucumber.core.ScenarioContext;
 import com.alliander.osgp.cucumber.platform.PlatformDefaults;
 import com.alliander.osgp.cucumber.platform.PlatformKeys;
-
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.And;
+import org.junit.Assert;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.Notification;
+import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.NotificationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class NotificationSteps extends GlueBase {
 
     private int WAIT_FOR_NEXT_NOTIFICATION_CHECK = 1000;
-    private int MAX_WAIT_FOR_NOTIFICATION = 1200000;
+    private int MAX_WAIT_FOR_NOTIFICATION = 60000;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationSteps.class);
 
     @Autowired
     private NotificationService mockNotificationService;
 
-    @When("^the OSGP connection is lost with the RTU device$")
-    public void theOSGPConnectionIsLostWithTheRTUDevice() throws Throwable {
-
-    }
-
-    @Then("^I should receive a notification$")
+    @And("^I receive a notification$")
     public void iShouldReceiveANotification() throws Throwable {
         int waited = 0;
 

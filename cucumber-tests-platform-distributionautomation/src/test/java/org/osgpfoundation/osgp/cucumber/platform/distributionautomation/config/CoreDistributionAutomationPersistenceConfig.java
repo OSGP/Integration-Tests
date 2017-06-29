@@ -7,9 +7,9 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
+import com.alliander.osgp.cucumber.platform.config.ApplicationPersistenceConfiguration;
+import com.alliander.osgp.domain.core.repositories.DeviceRepository;
+import org.osgpfoundation.osgp.domain.da.repositories.RtuDeviceRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,9 +19,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
-import com.alliander.osgp.cucumber.platform.config.ApplicationPersistenceConfiguration;
-import com.alliander.osgp.domain.core.repositories.DeviceRepository;
-import org.osgpfoundation.osgp.domain.da.repositories.RtuDeviceRepository;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(entityManagerFactoryRef = "entityMgrCoreDistributionAutomation", transactionManagerRef = "txMgrCoreDistributionAutomation", basePackageClasses = {

@@ -7,15 +7,13 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.steps.mocks;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alliander.osgp.cucumber.core.GlueBase;
-import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.mocks.iec61850.Iec61850MockServer;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.mocks.iec61850.Iec61850MockServer;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class RtuWagoSteps extends GlueBase {
 

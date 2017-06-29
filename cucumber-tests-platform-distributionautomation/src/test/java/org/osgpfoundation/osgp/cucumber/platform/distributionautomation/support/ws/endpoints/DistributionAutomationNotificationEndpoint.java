@@ -7,6 +7,10 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.endpoints;
 
+import com.alliander.osgp.adapter.ws.endpointinterceptors.OrganisationIdentification;
+import com.alliander.osgp.shared.exceptionhandling.WebServiceException;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.SendNotificationRequest;
+import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.SendNotificationResponse;
 import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.support.ws.distributionautomation.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,16 +20,12 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import com.alliander.osgp.adapter.ws.endpointinterceptors.OrganisationIdentification;
-import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.SendNotificationRequest;
-import org.osgpfoundation.osgp.adapter.ws.schema.distributionautomation.notification.SendNotificationResponse;
-import com.alliander.osgp.shared.exceptionhandling.WebServiceException;
-
 @Endpoint
 public class DistributionAutomationNotificationEndpoint {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DistributionAutomationNotificationEndpoint.class);
-    private static final String  DISTRIBUTIONAUTOMATION_NOTIFICATION_NAMESPACE = "http://www.osgpfoundation.org/schemas/osgp/distributionautomation/notification/2016/06";
+    private static final String DISTRIBUTIONAUTOMATION_NOTIFICATION_NAMESPACE = "http://www.osgpfoundation.org/schemas/osgp/distributionautomation/notification/2017/04";
+
 
     @Autowired
     private NotificationService notificationService;

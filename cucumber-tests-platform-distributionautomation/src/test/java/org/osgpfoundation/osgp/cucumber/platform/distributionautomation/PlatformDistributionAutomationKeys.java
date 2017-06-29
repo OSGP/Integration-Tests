@@ -11,4 +11,11 @@ package org.osgpfoundation.osgp.cucumber.platform.distributionautomation;
 
 public class PlatformDistributionAutomationKeys extends com.alliander.osgp.cucumber.platform.PlatformKeys {
 
+    public static final String KEY_NUMBER_OF_LOGICAL_DEVICES = "LogicalDevices";
+    public static final String KEY_NUMBER_OF_LOGICAL_NODES = "LogicalNodes";
+    public static final String KEY_NUMBER_OF_LOGICAL_NODE_NAME = "LogicalNodeName";
+    public static final String KEY_HEALTH_STATUS = "HealthStatus";
+    public static final String KEY_FROM_DATE = "From";
+    public static final String KEY_TO_DATE = "To";
+
 }

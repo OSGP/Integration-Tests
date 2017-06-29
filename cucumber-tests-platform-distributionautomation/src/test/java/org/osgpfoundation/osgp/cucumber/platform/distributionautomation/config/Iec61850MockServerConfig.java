@@ -7,11 +7,10 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.config;
 
+import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.mocks.iec61850.Iec61850MockServer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.mocks.iec61850.Iec61850MockServer;
 
 @Configuration
 public class Iec61850MockServerConfig {
@@ -26,6 +25,6 @@ public class Iec61850MockServerConfig {
 
     @Bean(destroyMethod = "stop", initMethod = "start")
     public Iec61850MockServer iec61850MockServerWAGO61850ServerRTU1() {
-        return new Iec61850MockServer("WAGO61850ServerRTU1", "Simple_substation_v0.13 (incl. 2 bays and edition 2.0).icd", 62105, "WAGO61850ServerRTU1");
+        return new Iec61850MockServer("WAGO61850ServerRTU1", "Simple_substation_v0.13 (incl. 2 bays and edition 2.0).icd", 62100, "WAGO61850ServerRTU1");
     }
 }

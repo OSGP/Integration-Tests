@@ -2,165 +2,497 @@
   License, Version 2.0 (the "License"); you may not use this file except in 
   compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.osgpfoundation.osgp</groupId>
-  <artifactId>cucumber-tests-platform-distributionautomation</artifactId>
-  <packaging>jar</packaging>
-  <name>cucumber-tests-platform-distributionautomation</name>
+    <artifactId>cucumber-tests-platform-distributionautomation</artifactId>
+    <packaging>jar</packaging>
+    <name>cucumber-tests-platform-distributionautomation</name>
 
-  <parent>
-    <groupId>com.alliander.osgp</groupId>
-    <artifactId>parent-integration-tests</artifactId>
-    <version>4.12.0-SNAPSHOT</version>
-    <relativePath>../parent-integration-tests/pom.xml</relativePath>
-  </parent>
+    <parent>
+        <groupId>com.alliander.osgp</groupId>
+        <artifactId>parent-integration-tests</artifactId>
+        <version>4.13.0-SNAPSHOT</version>
+        <relativePath>../parent-integration-tests/pom.xml</relativePath>
+    </parent>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>log4j-over-slf4j</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jgoodies</groupId>
-      <artifactId>forms</artifactId>
-    </dependency>
+    <properties>
+        <cargo.version>1.6.0</cargo.version>
+        <flyway.version>4.2.0</flyway.version>
+        <io.fabric8.version>0.21.0</io.fabric8.version>
+        <maven.antrun.version>1.6</maven.antrun.version>
+        <jacoco.version>0.7.9</jacoco.version>
+        <jacoco.agent>${project.build.directory}/org.jacoco.agent.jar</jacoco.agent>
+        <jacoco.port>6300</jacoco.port>
 
-    <!-- Cucumber Framework -->
-    <dependency>
-      <groupId>info.cukes</groupId>
-      <artifactId>cucumber-junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>info.cukes</groupId>
-      <artifactId>cucumber-java</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>info.cukes</groupId>
-      <artifactId>cucumber-spring</artifactId>
-      <scope>test</scope>
-    </dependency>
 
-    <!-- Spring Framework -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-    </dependency>
+        <!-- Jacoco source code coverage -->
+        <classes.directory.domain>../Platform/osgp-adapter-domain-distributionautomation/target/classes</classes.directory.domain>
+        <classes.directory.ws>../Platform/osgp-adapter-ws-distributionautomation/target/classes</classes.directory.ws>
+        <classes.directory.pa>../Protocol-Adapter-IEC61850/target/classes</classes.directory.pa>
+        <classes.directory.core>../Platform/osgp-core/target/classes</classes.directory.core>
+        <classes.directory.logging>../Platform/osgp-logging/target/classes</classes.directory.logging>
 
-    <!-- Spring Data -->
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-    </dependency>
+        <sources.directory.domain>../Platform/osgp-adapter-domain-distributionautomation/src/main/java</sources.directory.domain>
+        <sources.directory.ws>../Platform/osgp-adapter-ws-distributionautomation/src/main/java</sources.directory.ws>
+        <sources.directory.pa>../Protocol-Adapter-IEC61850/src/main/java</sources.directory.pa>
+        <sources.directory.core>../Platform/osgp-core/src/main/java</sources.directory.core>
+        <sources.directory.logging>../Platform/osgp-logging/src/main/java</sources.directory.logging>
+    </properties>
 
-    <!-- Spring WS -->
-    <dependency>
-      <groupId>org.springframework.ws</groupId>
-      <artifactId>spring-ws-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.ws</groupId>
-      <artifactId>spring-ws-support</artifactId>
-    </dependency>
 
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <scope>provided</scope>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jgoodies</groupId>
+            <artifactId>forms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.cargo</groupId>
+            <artifactId>cargo-maven2-plugin</artifactId>
+            <version>${cargo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <version>${jacoco.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.ant</artifactId>
+            <version>${jacoco.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+        </dependency>
 
-    <!-- OSGP -->
-    <dependency>
-      <groupId>org.osgpfoundation.osgp</groupId>
-      <artifactId>osgp-adapter-ws-distributionautomation</artifactId>
-      <classifier>classes</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.osgpfoundation.osgp</groupId>
-      <artifactId>osgp-adapter-domain-distributionautomation</artifactId>
-      <classifier>classes</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.osgpfoundation.osgp</groupId>
-      <artifactId>osgp-domain-distributionautomation</artifactId>
-      <classifier>classes</classifier>
-    </dependency>
-    <dependency>
-      <groupId>com.alliander.osgp</groupId>
-      <artifactId>osgp-protocol-adapter-iec61850</artifactId>
-      <classifier>classes</classifier>
-    </dependency>
-    <dependency>
-      <groupId>com.alliander.osgp</groupId>
-      <artifactId>osgp-protocol-simulator-iec61850</artifactId>
-    </dependency>
+        <!-- Cucumber Framework -->
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-spring</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-    <!-- test -->
-    <dependency>
-      <groupId>com.alliander.osgp</groupId>
-      <artifactId>osgp-adapter-ws-microgrids</artifactId>
-      <classifier>classes</classifier>
-    </dependency>
+        <!-- Spring Framework -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
 
-    <!-- OSGP Cucumber -->
-    <dependency>
-      <groupId>com.alliander</groupId>
-      <artifactId>cucumber-tests-core</artifactId>
-      <type>test-jar</type>
-    </dependency>
-    <dependency>
-      <groupId>com.alliander</groupId>
-      <artifactId>cucumber-tests-platform</artifactId>
-      <type>test-jar</type>
-    </dependency>
-  </dependencies>
+        <!-- Spring Data -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
+        <!-- Spring WS -->
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-support</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- OSGP for cargo-->
+        <dependency>
+            <groupId>org.osgpfoundation.osgp</groupId>
+            <artifactId>osgp-adapter-domain-distributionautomation</artifactId>
+            <version>${osgp.version}</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>org.osgpfoundation.osgp</groupId>
+            <artifactId>osgp-adapter-ws-distributionautomation</artifactId>
+            <version>${osgp.version}</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.alliander.osgp</groupId>
+            <artifactId>osgp-protocol-adapter-iec61850</artifactId>
+            <version>${osgp.version}</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.alliander.osgp</groupId>
+            <artifactId>osgp-core</artifactId>
+            <version>${osgp.version}</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.alliander.osgp</groupId>
+            <artifactId>osgp-logging</artifactId>
+            <version>${osgp.version}</version>
+            <type>war</type>
+        </dependency>
+
+
+        <!-- OSGP for cucumber-->
+        <dependency>
+            <groupId>org.osgpfoundation.osgp</groupId>
+            <artifactId>osgp-adapter-ws-distributionautomation</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.osgpfoundation.osgp</groupId>
+            <artifactId>osgp-adapter-domain-distributionautomation</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.osgpfoundation.osgp</groupId>
+            <artifactId>osgp-domain-distributionautomation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alliander.osgp</groupId>
+            <artifactId>osgp-protocol-adapter-iec61850</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.alliander.osgp</groupId>
+            <artifactId>osgp-protocol-simulator-iec61850</artifactId>
+        </dependency>
+
+        <!-- OSGP Cucumber -->
+        <dependency>
+            <groupId>com.alliander</groupId>
+            <artifactId>cucumber-tests-core</artifactId>
+            <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.alliander</groupId>
+            <artifactId>cucumber-tests-platform</artifactId>
+            <type>test-jar</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+
+            <!-- 0. Download jacoco library's; mvn test-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jacoco</groupId>
+                                    <artifactId>org.jacoco.agent</artifactId>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}</outputDirectory>
+                                    <classifier>runtime</classifier>
+                                    <destFileName>org.jacoco.agent.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.jacoco</groupId>
+                                    <artifactId>org.jacoco.ant</artifactId>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}</outputDirectory>
+                                    <destFileName>org.jacoco.ant.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 1. Start containers (postgresql and activemq ); mvn docker start -DskipITs=false -->
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${io.fabric8.version}</version>
+                <configuration>
+                    <skip>${skipITs}</skip>
+                    <images>
+                        <!-- A single's image configuration -->
+                        <image>
+                            <alias>activemq</alias>
+                            <name>webcenter/activemq:latest</name>
+                            <run>
+                                <ports>
+                                    <port>61616:61616</port>
+                                    <port>8161:8161</port>
+                                </ports>
+                            </run>
+                        </image>
+                        <!-- A single's image configuration -->
+                        <image>
+                            <alias>postgres</alias>
+                            <name>postgres:latest</name>
+                            <run>
+                                <ports>
+                                    <port>5432:5432</port>
+                                </ports>
+                                <env>
+                                    <POSTGRES_PASSWORD>postgres</POSTGRES_PASSWORD>
+                                    <POSTGRES_USER>postgres</POSTGRES_USER>
+                                </env>
+                                <volumes>
+                                    <bind>
+                                        <volume>
+                                            ${project.basedir}/src/test/resources/sql/create-users-and-databases.sh:/docker-entrypoint-initdb.d/create-users-and-databases.sh
+                                        </volume>
+                                    </bind>
+                                </volumes>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 2. Start tomcat and DA apps and dependencies; mvn cargo:run -DskipITs=false -->
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>${cargo.version}</version>
+                <configuration>
+                    <skip>${skipITs}</skip>
+                    <container>
+                        <containerId>tomcat8x</containerId>
+                        <zipUrlInstaller>
+                            <url>http://repo1.maven.org/maven2/org/apache/tomcat/tomcat/8.5.4/tomcat-8.5.4.zip</url>
+                        </zipUrlInstaller>
+                        <output>${project.build.directory}/ci-cargo/container.log</output>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                            </dependency>
+                        </dependencies>
+                    </container>
+                    <configuration>
+                        <home>${project.build.directory}/ci-cargo</home>
+                        <properties>
+                            <cargo.start.jvmargs> -javaagent:${jacoco.agent}=output=tcpserver,port=${jacoco.port},includes=*,excludes=*_javassist_*,jmx=true</cargo.start.jvmargs>
+                        </properties>
+                    </configuration>
+                    <deployables>
+                        <deployable>
+                            <groupId>org.osgpfoundation.osgp</groupId>
+                            <artifactId>osgp-adapter-domain-distributionautomation</artifactId>
+                            <type>war</type>
+                        </deployable>
+                        <deployable>
+                            <groupId>org.osgpfoundation.osgp</groupId>
+                            <artifactId>osgp-adapter-ws-distributionautomation</artifactId>
+                            <type>war</type>
+                        </deployable>
+                        <deployable>
+                            <groupId>com.alliander.osgp</groupId>
+                            <artifactId>osgp-protocol-adapter-iec61850</artifactId>
+                            <type>war</type>
+                        </deployable>
+                        <deployable>
+                            <groupId>com.alliander.osgp</groupId>
+                            <artifactId>osgp-core</artifactId>
+                            <type>war</type>
+                        </deployable>
+                        <deployable>
+                            <groupId>com.alliander.osgp</groupId>
+                            <artifactId>osgp-logging</artifactId>
+                            <type>war</type>
+                        </deployable>
+                    </deployables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 3. Migrate database and seed test data; mvn flyway:migrate -DskipITs=false -->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>${flyway.version}</version>
+                <configuration>
+                    <skip>${skipITs}</skip>
+                    <url>jdbc:postgresql://localhost:5432/osgp_core</url>
+                    <user>osp_admin</user>
+                    <password>1234</password>
+                    <locations>
+                        filesystem:${project.basedir}/src/test/resources/sql/flyway/
+                    </locations>
+                    <ignoreMissingMigrations>true</ignoreMissingMigrations>
+                    <ignoreFutureMigrations>true</ignoreFutureMigrations>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>migrate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 4. Run tests -->
+
+
+            <!-- 5. Get coverage -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <!--
+                        Ensures that the code coverage report for integration tests after
+                        integration tests have been run.
+                    -->
+                    <execution>
+                        <id>dump</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>dump</goal>
+                        </goals>
+                        <configuration>
+                            <address>localhost</address>
+                            <port>${jacoco.port}</port>
+                            <append>false</append>
+                            <destFile>${project.build.directory}/Coverage-report/jacoco-it.exec</destFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 6. Generate coverage report -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>${maven.antrun.version}</version>
+                <executions>
+                    <execution>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!-- Execute an ant task within maven -->
+                                <taskdef name="report" classname="org.jacoco.ant.ReportTask">
+                                    <classpath path="${project.build.directory}/org.jacoco.ant.jar"/>
+                                </taskdef>
+                                <mkdir dir="${project.build.directory}/Coverage-report/"/>
+                                <report>
+                                    <executiondata>
+                                        <fileset dir="${project.build.directory}/Coverage-report">
+                                            <include name="jacoco-it.exec"/>
+                                        </fileset>
+                                    </executiondata>
+                                    <structure name="DA webservices">
+                                        <group name="osgp-adapter-domain-distributionautomation">
+                                            <classfiles>
+                                                <fileset dir="${classes.directory.domain}"/>
+                                            </classfiles>
+                                            <sourcefiles encoding="UTF-8">
+                                                <fileset dir="${sources.directory.domain}"/>
+                                            </sourcefiles>
+                                        </group>
+                                        <group name="osgp-adapter-ws-distributionautomation">
+                                            <classfiles>
+                                                <fileset dir="${classes.directory.ws}"/>
+                                            </classfiles>
+                                            <sourcefiles encoding="UTF-8">
+                                                <fileset dir="${sources.directory.ws}"/>
+                                            </sourcefiles>
+                                        </group>
+                                    </structure>
+                                    <html destdir="${basedir}/target/Coverage-report/html"/>
+                                    <xml destfile="${basedir}/target/Coverage-report/coverage-report.xml"/>
+                                    <csv destfile="${basedir}/target/Coverage-report/coverage-report.csv"/>
+                                </report>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

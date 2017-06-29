@@ -7,14 +7,12 @@
  */
 package org.osgpfoundation.osgp.cucumber.platform.distributionautomation.glue.hooks;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alliander.osgp.cucumber.core.GlueBase;
 import com.alliander.osgp.cucumber.core.ScenarioContext;
-import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.database.Database;
-
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import org.osgpfoundation.osgp.cucumber.platform.distributionautomation.database.Database;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Class with all the scenario hooks when each scenario runs.
