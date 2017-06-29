@@ -30,7 +30,7 @@ public class CoreDistributionAutomationPersistenceConfig extends ApplicationPers
     @Value("${db.name.osgp_core}")
     private String databaseName;
 
-    @Value("${entitymanager.packages.to.scan.core}")
+    @Value("${entitymanager.packages.to.scan.da}")
     private String entitymanagerPackagesToScan;
 
     public CoreDistributionAutomationPersistenceConfig() {

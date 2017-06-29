@@ -128,8 +128,8 @@ public class CoreDatabase {
         this.deviceAuthorizationRepository.deleteAllInBatch();
         this.deviceLogItemRepository.deleteAllInBatch();
         this.scheduledTaskRepository.deleteAllInBatch();
-//        this.eanRepository.deleteAllEans();
-//        this.deviceRepository.deleteDeviceOutputSettings();
+        this.eanRepository.deleteAllEans();
+        this.deviceRepository.deleteDeviceOutputSettings();
         this.deviceFirmwareRepository.deleteAllInBatch();
         this.eventRepository.deleteAllInBatch();
         this.smartMeterRepository.deleteAllInBatch();
@@ -147,8 +147,8 @@ public class CoreDatabase {
         this.deviceAuthorizationRepository.deleteAll();
         this.deviceLogItemRepository.deleteAll();
         this.scheduledTaskRepository.deleteAll();
-//        this.eanRepository.deleteAllEans();
-//        this.deviceRepository.deleteDeviceOutputSettings();
+        this.eanRepository.deleteAllEans();
+        this.deviceRepository.deleteDeviceOutputSettings();
         this.deviceFirmwareRepository.deleteAll();
         this.eventRepository.deleteAll();
         this.smartMeterRepository.deleteAll();
