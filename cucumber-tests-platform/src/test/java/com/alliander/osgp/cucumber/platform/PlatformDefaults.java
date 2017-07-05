@@ -138,7 +138,7 @@ public class PlatformDefaults {
     public static final String MANUFACTURER_CODE = "Test";
     public static final String MANUFACTURER_NAME = "Test";
     public static final Boolean MANUFACTURER_USE_PREFIX = false;
-    public static final String PHONENUMBER = "+31 43 1234567";
+    public static final String PHONE_NUMBER = "+31 43 1234567";
     public static final com.alliander.osgp.domain.core.valueobjects.PlatformFunctionGroup PLATFORM_FUNCTION_GROUP = com.alliander.osgp.domain.core.valueobjects.PlatformFunctionGroup.ADMIN;
     public static final com.alliander.osgp.domain.core.valueobjects.DeviceFunctionGroup DEVICE_FUNCTION_GROUP = com.alliander.osgp.domain.core.valueobjects.DeviceFunctionGroup.OWNER;
     public static final Integer SHORT_INTERVAL = 15;
@@ -176,7 +176,7 @@ public class PlatformDefaults {
     public static final Integer OSLP_ELSTER_SERVER_PORT = 12122;
 
     public static final Long DEFAULT_SCHEDULE_VERSION = 1L;
-    public static final String SMSTYPE = "?";
+    public static final String SMS_TYPE = "?";
     public static final String LIGHTMEASUREMENT_LASTMESSAGE = "";
     public static final Integer SMS_INDEX = 1;
 

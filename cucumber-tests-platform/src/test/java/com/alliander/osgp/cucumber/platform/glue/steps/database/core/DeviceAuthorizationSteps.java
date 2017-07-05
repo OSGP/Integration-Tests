@@ -51,11 +51,10 @@ public class DeviceAuthorizationSteps extends GlueBase {
      *
      * @param settings
      *            The settings for the device authorization to be used.
-     * @throws Throwable
      */
     @Given("^a device authorization$")
     @Transactional("txMgrCore")
-    public void aDeviceAuthorization(final Map<String, String> settings) throws Throwable {
+    public void aDeviceAuthorization(final Map<String, String> settings) {
 
         final Device device = this.deviceRepository.findByDeviceIdentification(getString(settings,
                 PlatformKeys.KEY_DEVICE_IDENTIFICATION, PlatformDefaults.DEFAULT_DEVICE_IDENTIFICATION));

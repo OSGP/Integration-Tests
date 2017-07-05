@@ -55,7 +55,6 @@ public class SsldDeviceSteps extends BaseDeviceSteps {
      *
      * @param settings
      * @return
-     * @throws Throwable
      * @deprecated Deprecated because you should specify the type in a test.
      *             SSLD/RTU or a different one. This method now will create a
      *             SSLD device.
@@ -63,7 +62,7 @@ public class SsldDeviceSteps extends BaseDeviceSteps {
     @Deprecated
     @Given("^a device$")
     @Transactional("txMgrCore")
-    public Ssld aDevice(final Map<String, String> settings) throws Throwable {
+    public Ssld aDevice(final Map<String, String> settings) {
         return this.createAnSsldDevice(settings);
     }
 
@@ -76,13 +75,13 @@ public class SsldDeviceSteps extends BaseDeviceSteps {
      */
     @Given("^an ssld device$")
     @Transactional("txMgrCore")
-    public Ssld anSsldDevice(final Map<String, String> settings) throws Throwable {
+    public Ssld anSsldDevice(final Map<String, String> settings) {
         return this.createAnSsldDevice(settings);
     }
 
     @Given("^a relay status$")
     @Transactional("txMgrCore")
-    public void aRelayStatus(final Map<String, String> settings) throws Exception {
+    public void aRelayStatus(final Map<String, String> settings) throws NumberFormatException, Exception {
 
         final Ssld ssld = this.ssldRepository.findByDeviceIdentification(getString(settings,
                 PlatformKeys.KEY_DEVICE_IDENTIFICATION, PlatformDefaults.DEFAULT_DEVICE_IDENTIFICATION));
@@ -124,7 +123,7 @@ public class SsldDeviceSteps extends BaseDeviceSteps {
         this.deviceSteps.theDeviceContains(expectedEntity);
     }
 
-    private Ssld createAnSsldDevice(final Map<String, String> settings) throws Throwable {
+    private Ssld createAnSsldDevice(final Map<String, String> settings) {
         // Set the required stuff
         final String deviceIdentification = getString(settings, PlatformKeys.KEY_DEVICE_IDENTIFICATION);
         Ssld ssld = new Ssld(deviceIdentification);

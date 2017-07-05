@@ -41,7 +41,7 @@ public class OslpDeviceSteps extends GlueBase {
     private SsldDeviceSteps ssldDeviceSteps;
 
     @Given("^an ssld oslp device$")
-    public void anSsldOslpDevice(final Map<String, String> settings) throws Throwable {
+    public void anSsldOslpDevice(final Map<String, String> settings) {
 
         // First create the device itself
         this.ssldDeviceSteps.anSsldDevice(settings);
