@@ -8,9 +8,11 @@
 package com.alliander.osgp.cucumber.platform.glue.steps.database.core;
 
 import static com.alliander.osgp.cucumber.core.Helpers.getBoolean;
+import static com.alliander.osgp.cucumber.core.Helpers.getNullOrNonEmptyString;
 import static com.alliander.osgp.cucumber.core.Helpers.getString;
 
 import java.util.Map;
+import java.util.UUID;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,19 +59,32 @@ public class FirmwareSteps {
             deviceModel = this.deviceModelSteps.aDeviceModel(settings);
         }
 
-        final FirmwareModuleData firmwareModuleData = new FirmwareModuleData(
-                getString(settings, PlatformKeys.FIRMWARE_MODULE_VERSION_COMM,
-                        PlatformDefaults.FIRMWARE_MODULE_VERSION_COMM),
-                getString(settings, PlatformKeys.FIRMWARE_MODULE_VERSION_FUNC,
-                        PlatformDefaults.FIRMWARE_MODULE_VERSION_FUNC),
-                getString(settings, PlatformKeys.FIRMWARE_MODULE_VERSION_MA,
-                        PlatformDefaults.FIRMWARE_MODULE_VERSION_MA),
-                getString(settings, PlatformKeys.FIRMWARE_MODULE_VERSION_MBUS,
-                        PlatformDefaults.FIRMWARE_MODULE_VERSION_MBUS),
-                getString(settings, PlatformKeys.FIRMWARE_MODULE_VERSION_SEC,
-                        PlatformDefaults.FIRMWARE_MODULE_VERSION_SEC));
+        final String comm = getNullOrNonEmptyString(settings, PlatformKeys.FIRMWARE_MODULE_VERSION_COMM,
+                PlatformDefaults.FIRMWARE_MODULE_VERSION_COMM);
+        final String func = getNullOrNonEmptyString(settings, PlatformKeys.FIRMWARE_MODULE_VERSION_FUNC,
+                PlatformDefaults.FIRMWARE_MODULE_VERSION_FUNC);
+        final String ma = getNullOrNonEmptyString(settings, PlatformKeys.FIRMWARE_MODULE_VERSION_MA,
+                PlatformDefaults.FIRMWARE_MODULE_VERSION_MA);
+        final String mbus = getNullOrNonEmptyString(settings, PlatformKeys.FIRMWARE_MODULE_VERSION_MBUS,
+                PlatformDefaults.FIRMWARE_MODULE_VERSION_MBUS);
+        final String sec = getNullOrNonEmptyString(settings, PlatformKeys.FIRMWARE_MODULE_VERSION_SEC,
+                PlatformDefaults.FIRMWARE_MODULE_VERSION_SEC);
 
-        final Firmware entity = new Firmware(deviceModel, getString(settings, PlatformKeys.FIRMWARE_FILENAME, ""),
+        final FirmwareModuleData firmwareModuleData = new FirmwareModuleData(comm, func, ma, mbus, sec);
+
+        /*
+         * Using the filename as firmware identification is necessary as long as
+         * the DLMS protocol adapter expects the filename to identify a
+         * firmware. As soon as the protocol adapter accepts the newer
+         * identification, it is no longer necessary to do this and the default
+         * random identification should do fine for the tests. (The
+         * identification then no longer needs to be added to the constructor
+         * used to create the firmware.)
+         */
+        final String identification = getString(settings, PlatformKeys.FIRMWARE_FILENAME,
+                UUID.randomUUID().toString().replace("-", ""));
+        final Firmware entity = new Firmware(identification, deviceModel,
+                getString(settings, PlatformKeys.FIRMWARE_FILENAME, ""),
                 getString(settings, PlatformKeys.FIRMWARE_DESCRIPTION, PlatformDefaults.FIRMWARE_DESCRIPTION),
                 getBoolean(settings, PlatformKeys.FIRMWARE_PUSH_TO_NEW_DEVICES,
                         PlatformDefaults.FIRMWARE_PUSH_TO_NEW_DEVICE),
