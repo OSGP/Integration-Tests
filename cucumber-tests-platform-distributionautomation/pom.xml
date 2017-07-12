@@ -345,7 +345,7 @@
                     <configuration>
                         <home>${project.build.directory}/ci-cargo</home>
                         <properties>
-                            <cargo.start.jvmargs> -javaagent:${jacoco.agent}=output=tcpserver,port=${jacoco.port},includes=*,excludes=*_javassist_*,jmx=true</cargo.start.jvmargs>
+                            <cargo.start.jvmargs> -javaagent:${jacoco.agent}=output=tcpserver,port=${jacoco.port},includes=*,excludes=*_javassist_*,jmx=true -Dweb.service.notification.url=http://localhost:8088/ws/da-notification</cargo.start.jvmargs>
                         </properties>
                     </configuration>
                     <deployables>
@@ -438,6 +438,7 @@
                             <goal>dump</goal>
                         </goals>
                         <configuration>
+                            <skip>${skipITs}</skip>
                             <address>localhost</address>
                             <port>${jacoco.port}</port>
                             <append>false</append>
@@ -452,6 +453,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>${maven.antrun.version}</version>
+                <configuration>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>post-integration-test</phase>
@@ -459,7 +462,7 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <target>
+                            <target unless="${skipITs}">
                                 <!-- Execute an ant task within maven -->
                                 <taskdef name="report" classname="org.jacoco.ant.ReportTask">
                                     <classpath path="${project.build.directory}/org.jacoco.ant.jar"/>

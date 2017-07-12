@@ -18,6 +18,9 @@ public class Iec61850MockServerConfig {
     @Value("${iec61850.mock.networkaddress}")
     private String iec61850MockNetworkAddress;
 
+    @Value("${iec61850.mock.icdfilename}")
+    private String iec61850MockIcdFilename;
+
     @Bean
     public String iec61850MockNetworkAddress() {
         return this.iec61850MockNetworkAddress;
@@ -25,6 +28,6 @@ public class Iec61850MockServerConfig {
 
     @Bean(destroyMethod = "stop", initMethod = "start")
     public Iec61850MockServer iec61850MockServerWAGO61850ServerRTU1() {
-        return new Iec61850MockServer("WAGO61850ServerRTU1", "Simple_substation_v0.13 (incl. 2 bays and edition 2.0).icd", 62100, "WAGO61850ServerRTU1");
+        return new Iec61850MockServer("WAGO61850ServerRTU1", iec61850MockIcdFilename, 62100, "WAGO61850ServerRTU1");
     }
 }
