@@ -251,13 +251,6 @@
                                     <classifier>runtime</classifier>
                                     <destFileName>org.jacoco.agent.jar</destFileName>
                                 </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.jacoco</groupId>
-                                    <artifactId>org.jacoco.ant</artifactId>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}</outputDirectory>
-                                    <destFileName>org.jacoco.ant.jar</destFileName>
-                                </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>
@@ -498,9 +491,9 @@
                                             </sourcefiles>
                                         </group>
                                     </structure>
-                                    <html destdir="${basedir}/target/Coverage-report/html"/>
-                                    <xml destfile="${basedir}/target/Coverage-report/coverage-report.xml"/>
-                                    <csv destfile="${basedir}/target/Coverage-report/coverage-report.csv"/>
+                                    <html destdir="${project.build.directory}/Coverage-report/html"/>
+                                    <xml destfile="${project.build.directory}/Coverage-report/coverage-report.xml"/>
+                                    <csv destfile="${project.build.directory}/Coverage-report/coverage-report.csv"/>
                                 </report>
                             </target>
                         </configuration>
