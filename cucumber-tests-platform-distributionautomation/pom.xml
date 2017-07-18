@@ -349,7 +349,11 @@
                     <configuration>
                         <home>${project.build.directory}/ci-cargo</home>
                         <properties>
-                            <cargo.start.jvmargs> -javaagent:${jacoco.agent}=output=tcpserver,port=${jacoco.port},includes=*,excludes=*_javassist_*,jmx=true -Dweb.service.notification.url=http://localhost:8088/ws/da-notification</cargo.start.jvmargs>
+                            <cargo.start.jvmargs>
+                                -javaagent:${jacoco.agent}=output=tcpserver,port=${jacoco.port},includes=*,excludes=*_javassist_*,jmx=true
+                                -Dweb.service.notification.url=http://localhost:8088/ws/da-notification
+                                -Diec61850.icd.files.folder=${project.basedir}/../Protocol-Adapter-IEC61850/protocol-simulator-iec61850/src/main/resources/
+                            </cargo.start.jvmargs>
                         </properties>
                     </configuration>
                     <deployables>

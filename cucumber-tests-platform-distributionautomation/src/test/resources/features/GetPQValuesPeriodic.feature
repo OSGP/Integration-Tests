@@ -8,7 +8,7 @@ Feature: DistributionAutomation - GetPQValuesPeriodic
   Scenario: Request Periodic PQ value from device
     Given an rtu iec61850 device
       | DeviceIdentification | WAGO61850ServerRTU1                                        |
-      | IcdFilename          | Simple_substation_v0.13 (incl. 2 bays and edition 2.0).icd |
+      | IcdFilename          | Simple_substation_v0.14.icd |
       | Port                 | 62100                                                      |
     When I send a getPQValuesPeriodic request
       | DeviceIdentification | WAGO61850ServerRTU1      |
