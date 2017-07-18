@@ -70,6 +70,7 @@
 
     <!-- Automatic tests project -->
     <module>cucumber-tests-core</module>
+    <module>cucumber-tests-execution</module>
     <module>cucumber-tests-platform</module>
     <module>cucumber-tests-platform-distributionautomation</module>
 

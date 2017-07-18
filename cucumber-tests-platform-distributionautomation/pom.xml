@@ -24,7 +24,6 @@
         <jacoco.version>0.7.9</jacoco.version>
         <jacoco.agent>${project.build.directory}/org.jacoco.agent.jar</jacoco.agent>
         <jacoco.port>6300</jacoco.port>
-
         <skipServing>true</skipServing>
 
 
@@ -250,6 +249,14 @@
                                     <outputDirectory>${project.build.directory}</outputDirectory>
                                     <classifier>runtime</classifier>
                                     <destFileName>org.jacoco.agent.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.jacoco</groupId>
+                                    <artifactId>org.jacoco.ant</artifactId>
+                                    <overWrite>true</overWrite>
+                                    <classifier>nodeps</classifier>
+                                    <outputDirectory>${project.build.directory}</outputDirectory>
+                                    <destFileName>org.jacoco.ant.jar</destFileName>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
