@@ -454,7 +454,7 @@
                             <address>localhost</address>
                             <port>${jacoco.port}</port>
                             <append>false</append>
-                            <destFile>${project.build.directory}/Coverage-report/jacoco-it.exec</destFile>
+                            <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
                         </configuration>
                     </execution>
                 </executions>
@@ -479,10 +479,10 @@
                                 <taskdef name="report" classname="org.jacoco.ant.ReportTask">
                                     <classpath path="${project.build.directory}/org.jacoco.ant.jar"/>
                                 </taskdef>
-                                <mkdir dir="${project.build.directory}/Coverage-report/"/>
+                                <mkdir dir="${project.build.directory}/coverage-reports/"/>
                                 <report>
                                     <executiondata>
-                                        <fileset dir="${project.build.directory}/Coverage-report">
+                                        <fileset dir="${project.build.directory}/coverage-reports">
                                             <include name="jacoco-it.exec"/>
                                         </fileset>
                                     </executiondata>
@@ -504,9 +504,9 @@
                                             </sourcefiles>
                                         </group>
                                     </structure>
-                                    <html destdir="${project.build.directory}/Coverage-report/html"/>
-                                    <xml destfile="${project.build.directory}/Coverage-report/coverage-report.xml"/>
-                                    <csv destfile="${project.build.directory}/Coverage-report/coverage-report.csv"/>
+                                    <html destdir="${project.build.directory}/coverage-reports/html"/>
+                                    <xml destfile="${project.build.directory}/coverage-reports/coverage-report.xml"/>
+                                    <csv destfile="${project.build.directory}/coverage-reports/coverage-report.csv"/>
                                 </report>
                             </target>
                         </configuration>
