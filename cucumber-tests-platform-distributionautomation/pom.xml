@@ -30,15 +30,9 @@
         <!-- Jacoco source code coverage -->
         <classes.directory.domain>${project.basedir}/../Platform/osgp-adapter-domain-distributionautomation/target/classes</classes.directory.domain>
         <classes.directory.ws>${project.basedir}/../Platform/osgp-adapter-ws-distributionautomation/target/classes</classes.directory.ws>
-        <classes.directory.pa>${project.basedir}/../Protocol-Adapter-IEC61850/target/classes</classes.directory.pa>
-        <classes.directory.core>../Platform/osgp-core/target/classes</classes.directory.core>
-        <classes.directory.logging>../Platform/osgp-logging/target/classes</classes.directory.logging>
 
         <sources.directory.domain>${project.basedir}/../Platform/osgp-adapter-domain-distributionautomation/src/main/java</sources.directory.domain>
         <sources.directory.ws>${project.basedir}/../Platform/osgp-adapter-ws-distributionautomation/src/main/java</sources.directory.ws>
-        <sources.directory.pa>../Protocol-Adapter-IEC61850/src/main/java</sources.directory.pa>
-        <sources.directory.core>../Platform/osgp-core/src/main/java</sources.directory.core>
-        <sources.directory.logging>../Platform/osgp-logging/src/main/java</sources.directory.logging>
     </properties>
 
 
@@ -416,7 +410,7 @@
                     <user>osp_admin</user>
                     <password>1234</password>
                     <locations>
-                        filesystem:${project.basedir}/src/test/resources/sql/flyway/
+                        filesystem:${project.basedir}/src/test/resources/sql/distribution_automation/
                     </locations>
                     <ignoreMissingMigrations>true</ignoreMissingMigrations>
                     <ignoreFutureMigrations>true</ignoreFutureMigrations>
