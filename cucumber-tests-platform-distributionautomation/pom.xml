@@ -345,7 +345,7 @@
                         <properties>
                             <cargo.start.jvmargs>
                                 -javaagent:${jacoco.agent}=output=tcpserver,port=${jacoco.port},includes=*,excludes=*_javassist_*,jmx=true
-                                -Dweb.service.notification.url=http://localhost:8088/ws/da-notification
+                                -Dweb.service.notification.url=http://localhost:9000/ws/da-notification
                                 -Diec61850.icd.files.folder=${project.basedir}/../Protocol-Adapter-IEC61850/protocol-simulator-iec61850/src/main/resources/
                                 -Dweb.service.truststore.location=${project.basedir}/../certificates/trust.jks
                                 -Dweb.service.keystore.location=${project.basedir}/../certificates
