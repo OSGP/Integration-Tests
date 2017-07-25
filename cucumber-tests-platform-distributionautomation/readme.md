@@ -6,31 +6,32 @@ This readme describes how to run the regression test for DA webservices only.
 - docker (Installed and running)
 - java 8
 - maven
+- OSGP artifacts (Shared/Platform/etc)
 
 # How to run
 In the main directory (Integration-Tests) run:
-mvn -f pom-da.xml clean verify -DskipITs=false
+mvn -f pom.xml clean verify -DskipITs=false -DskipServing=false --pl 'cucumber-tests-core,cucumber-tests-platform,cucumber-tests-platform-distributionautomation'
 
 # Other
 
-### Only build and install the neccessary libraries
+### Only build and install ALL neccessary libraries + more
 In the main directory (Integration-Tests) run:
-mvn -f pom-da.xml clean install
+mvn -f pom.xml clean install
 
 ### Start Postgresql and Activemq
 In the cucumber DA directory run:
-mvn docker:start -DskipITs=false
+mvn docker:start -DskipITs=false -DskipServing=false
 
 This will start an empty database, and a clean activemq.
 
 ### Stop Postgresql and Activemq
 In the cucumber DA directory run:
-mvn docker:stop -DskipITs=false
+mvn docker:stop -DskipITs=false -DskipServing=false
 
 ### Serve DA platform
 In the cucumber DA directory run:
-mvn cargo:run -DskipITs=false
+mvn cargo:run -DskipITs=false -DskipServing=false
 
 ### Seed the database with demo/cucumber data
 In the cucumber DA directory run:
-mvn flyway:migrate -DskipITs=false
+mvn flyway:migrate -DskipITs=false -DskipServing=false
