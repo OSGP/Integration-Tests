@@ -56,7 +56,7 @@ public class PlatformDefaults {
     public static final String DEFAULT_SCHEDULE_CODE = "ScheduleCode";
     public static final String CODE = "Code";
 
-    public static final String DEFAULT_DEVICE_TYPE = "OSLP";
+    public static final String DEFAULT_DEVICE_TYPE = "SSLD";
 
     public static final Integer DEFAULT_DIMVALUE = 100;
     public static final String DEFAULT_DOMAINS = "COMMON;PUBLIC_LIGHTING;TARIFF_SWITCHING";
@@ -82,7 +82,7 @@ public class PlatformDefaults {
     public static final Float DEFAULT_LONGITUDE = new Float(0);
     public static final String DEFAULT_MANUFACTURER_CODE = "Test";
     public static final String DEFAULT_MANUFACTURER_ID = "Test";
-    public static final String DEFAULT_MANUFACTURER_NAME = "Test Manufacturer";
+    public static final String DEFAULT_MANUFACTURER_NAME = "Test";
     public static final Boolean DEFAULT_MANUFACTURER_USE_PREFIX = false;
     public static final String DEFAULT_NEW_ORGANIZATION_IDENTIFICATION = "NewOrganization";
     public static final String DEFAULT_NEW_ORGANIZATION_NAME = "New Organization";
@@ -135,11 +135,9 @@ public class PlatformDefaults {
     public static final DateTime EXPIRYDATECONTRACT = DateTime.now().plusWeeks(1);
     public static final LongTermIntervalType INTERVAL_TYPE = LongTermIntervalType.DAYS;
     public static final Integer LONG_INTERVAL = 1;
-    public static final String MANUFACTURER_CODE = "Test";
-    public static final String MANUFACTURER_NAME = "Test";
-    public static final Boolean MANUFACTURER_USE_PREFIX = false;
     public static final String PHONENUMBER = "+31 43 1234567";
     public static final com.alliander.osgp.domain.core.valueobjects.PlatformFunctionGroup PLATFORM_FUNCTION_GROUP = com.alliander.osgp.domain.core.valueobjects.PlatformFunctionGroup.ADMIN;
+    public static final com.alliander.osgp.domain.core.valueobjects.DeviceFunctionGroup DEVICE_FUNCTION_GROUP = com.alliander.osgp.domain.core.valueobjects.DeviceFunctionGroup.OWNER;
     public static final Integer SHORT_INTERVAL = 15;
     public static final String SMART_METER_E = "SMART_METER_E";
     public static final String SMART_METER_G = "SMART_METER_G";
@@ -154,9 +152,9 @@ public class PlatformDefaults {
     public static final String DEFAULT_SCHEDULE_NAME = "Schedule1";
     public static final String DEFAULT_SCHEDULE_DESCRIPTION = "This is the description for Schedule 1";
     public static final String DEFAULT_SCHEDULE_COLOR = "Green";
-    public static final Boolean DEFAULT_SCHEDULE_DEFAULT = true;
-    public static final Boolean DEFAULT_SCHEDULE_SUCCESS = true;
-    public static final Boolean DEFAULT_SCHEDULE_TEMPLATE = true;
+    public static final Boolean DEFAULT_SCHEDULE_DEFAULT = false;
+    public static final Boolean DEFAULT_SCHEDULE_SUCCESS = false;
+    public static final Boolean DEFAULT_SCHEDULE_TEMPLATE = false;
 
     public static final String FIRMWARE_MODULE_VERSION_COMM = "1";
     public static final String FIRMWARE_MODULE_VERSION_FUNC = "2";

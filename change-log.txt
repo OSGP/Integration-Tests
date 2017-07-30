@@ -1,5 +1,9 @@
 No revs given, searching automatically for latest released tags...
-Found toRev tag Integration-Tests-4.10.1--55
-Found fromRev tag release-4.10.1-55
-Commits between release-4.10.1-55 and Integration-Tests-4.10.1--55:
+Found toRev tag master-development-1021
+Found fromRev tag slave-development-15
+Commits between slave-development-15 and master-development-1021:
+* 63ff327	Merge pull request #269 from OSGP/FLEX-3143_Automate_regression_test_C155
+
+FLEX-3143 Automate regression test C155* e37a3a8	Merge branch 'development' of github.com:OSGP/Integration-Tests into FLEX-3143_Automate_regression_test_C155
+* 8aac265	Reverted changes default latitude and longitude* 2ce3f0b	FLEX-3143 ~ Updated code for failing tests
 
