@@ -16,6 +16,7 @@ import static com.alliander.osgp.cucumber.core.Helpers.getString;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public abstract class BaseDeviceSteps extends GlueBase {
     private OrganisationRepository organizationRepository;
 
     @Autowired
-    private ProtocolInfoRepository protocolInfoRepository;
+    protected ProtocolInfoRepository protocolInfoRepository;
 
     /**
      * Update an existing device with the given settings.
@@ -70,15 +71,28 @@ public abstract class BaseDeviceSteps extends GlueBase {
         // Now set the optional stuff
         if (settings.containsKey(PlatformKeys.KEY_TECHNICAL_INSTALLATION_DATE)
                 && !settings.get(PlatformKeys.KEY_TECHNICAL_INSTALLATION_DATE).isEmpty()) {
-            device.setTechnicalInstallationDate(getDate(settings, PlatformKeys.KEY_TECHNICAL_INSTALLATION_DATE).toDate());
+            device.setTechnicalInstallationDate(
+                    getDate(settings, PlatformKeys.KEY_TECHNICAL_INSTALLATION_DATE).toDate());
         }
 
-        final DeviceModel deviceModel = this.deviceModelRepository
-                .findByModelCode(getString(settings, PlatformKeys.KEY_DEVICE_MODEL, PlatformDefaults.DEFAULT_DEVICE_MODEL_MODEL_CODE));
+        /*
+         * Model code does not uniquely identify a device model, which is why
+         * deviceModelRepository is changed to return a list of device models.
+         * In the test data that is set up, there probably is only one device
+         * model for the given model code, and just selecting the first device
+         * model returned should work.
+         *
+         * A better solution might be to add the manufacturer in the scenario
+         * data and do a lookup by manufacturer and model code, which should
+         * uniquely define the device model.
+         */
+        final List<DeviceModel> deviceModels = this.deviceModelRepository.findByModelCode(
+                getString(settings, PlatformKeys.KEY_DEVICE_MODEL, PlatformDefaults.DEFAULT_DEVICE_MODEL_MODEL_CODE));
+        final DeviceModel deviceModel = deviceModels.get(0);
 
         if (settings.containsKey(PlatformKeys.DEVICEMODEL_METERED)) {
-            deviceModel.updateData(PlatformDefaults.DEFAULT_DEVICE_MODEL_DESCRIPTION,
-                    getBoolean(settings, PlatformKeys.DEVICEMODEL_METERED, PlatformDefaults.DEFAULT_DEVICE_MODEL_METERED));
+            deviceModel.updateData(PlatformDefaults.DEFAULT_DEVICE_MODEL_DESCRIPTION, getBoolean(settings,
+                    PlatformKeys.DEVICEMODEL_METERED, PlatformDefaults.DEFAULT_DEVICE_MODEL_METERED));
         }
 
         device.setDeviceModel(deviceModel);
@@ -89,8 +103,8 @@ public abstract class BaseDeviceSteps extends GlueBase {
 
         InetAddress inetAddress;
         try {
-            inetAddress = InetAddress
-                    .getByName(getString(settings, PlatformKeys.IP_ADDRESS, this.configuration.getDeviceNetworkAddress()));
+            inetAddress = InetAddress.getByName(
+                    getString(settings, PlatformKeys.IP_ADDRESS, this.configuration.getDeviceNetworkAddress()));
         } catch (final UnknownHostException e) {
             inetAddress = InetAddress.getLoopbackAddress();
         }
@@ -112,23 +126,28 @@ public abstract class BaseDeviceSteps extends GlueBase {
                 getString(settings, PlatformKeys.KEY_NUMBER, PlatformDefaults.DEFAULT_CONTAINER_NUMBER),
                 getString(settings, PlatformKeys.KEY_MUNICIPALITY, PlatformDefaults.DEFAULT_CONTAINER_MUNICIPALITY),
                 (settings.containsKey(PlatformKeys.KEY_LATITUDE) && !settings.get(PlatformKeys.KEY_LATITUDE).isEmpty())
-                        ? getFloat(settings, PlatformKeys.KEY_LATITUDE, PlatformDefaults.DEFAULT_LATITUDE) : null,
-                (settings.containsKey(PlatformKeys.KEY_LONGITUDE) && !settings.get(PlatformKeys.KEY_LONGITUDE).isEmpty())
-                        ? getFloat(settings, PlatformKeys.KEY_LONGITUDE, PlatformDefaults.DEFAULT_LONGITUDE) : null);
+                        ? getFloat(settings, PlatformKeys.KEY_LATITUDE, PlatformDefaults.DEFAULT_LATITUDE)
+                        : null,
+                (settings.containsKey(PlatformKeys.KEY_LONGITUDE)
+                        && !settings.get(PlatformKeys.KEY_LONGITUDE).isEmpty())
+                                ? getFloat(settings, PlatformKeys.KEY_LONGITUDE, PlatformDefaults.DEFAULT_LONGITUDE)
+                                : null);
 
         device.setActivated(getBoolean(settings, PlatformKeys.KEY_IS_ACTIVATED, PlatformDefaults.DEFAULT_IS_ACTIVATED));
         device = this.deviceRepository.save(device);
 
         if (getString(settings, PlatformKeys.KEY_ORGANIZATION_IDENTIFICATION,
                 PlatformDefaults.DEFAULT_ORGANIZATION_IDENTIFICATION) != "null") {
-            final Organisation organization = this.organizationRepository.findByOrganisationIdentification(getString(
-                    settings, PlatformKeys.KEY_ORGANIZATION_IDENTIFICATION, PlatformDefaults.DEFAULT_ORGANIZATION_IDENTIFICATION));
+            final Organisation organization = this.organizationRepository
+                    .findByOrganisationIdentification(getString(settings, PlatformKeys.KEY_ORGANIZATION_IDENTIFICATION,
+                            PlatformDefaults.DEFAULT_ORGANIZATION_IDENTIFICATION));
             final DeviceFunctionGroup functionGroup = getEnum(settings, PlatformKeys.KEY_DEVICE_FUNCTION_GROUP,
                     DeviceFunctionGroup.class, DeviceFunctionGroup.OWNER);
             final DeviceAuthorization authorization = device.addAuthorization(organization, functionGroup);
             final Device savedDevice = this.deviceRepository.save(device);
             this.deviceAuthorizationRepository.save(authorization);
-            ScenarioContext.current().put(PlatformKeys.KEY_DEVICE_IDENTIFICATION, savedDevice.getDeviceIdentification());
+            ScenarioContext.current().put(PlatformKeys.KEY_DEVICE_IDENTIFICATION,
+                    savedDevice.getDeviceIdentification());
 
             device = savedDevice;
         }
@@ -149,5 +168,16 @@ public abstract class BaseDeviceSteps extends GlueBase {
     public Device updateDevice(final String deviceIdentification, final Map<String, String> settings) {
         final Device device = this.deviceRepository.findByDeviceIdentification(deviceIdentification);
         return this.updateDevice(device, settings);
+    }
+
+    public DeviceAuthorization setDefaultDeviceAuthorizationForDevice(final Device device) {
+        device.addOrganisation(PlatformDefaults.DEFAULT_ORGANIZATION_IDENTIFICATION);
+
+        final Organisation organization = this.organizationRepository
+                .findByOrganisationIdentification(PlatformDefaults.DEFAULT_ORGANIZATION_IDENTIFICATION);
+        final DeviceAuthorization deviceAuthorization = device.addAuthorization(organization,
+                DeviceFunctionGroup.OWNER);
+
+        return this.deviceAuthorizationRepository.save(deviceAuthorization);
     }
 }
