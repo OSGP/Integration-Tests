@@ -7,12 +7,12 @@ def playbook = stream + '-at.yml'
 def extravars = 'ec2_instance_type=t2.large'
 def repo = 'git@github.com:SmartSocietyServices/Integration-Tests.git'
 
-def server = Artifactory.server 'OSGP Artifactory Server'
-def rtMaven = Artifactory.newMavenBuild()
-rtMaven.tool = 'Apache Maven 3.5.0' // Tool name from Jenkins configuration
-rtMaven.deployer releaseRepo:'osgp-release-local', snapshotRepo:'osgp-snapshot-local', server: server
-rtMaven.resolver releaseRepo:'osgp-release', snapshotRepo:'osgp-snapshot', server: server
-def buildInfo = Artifactory.newBuildInfo()
+//def server = Artifactory.server 'OSGP Artifactory Server'
+//def rtMaven = Artifactory.newMavenBuild()
+//rtMaven.tool = 'Apache Maven 3.5.0' // Tool name from Jenkins configuration
+//rtMaven.deployer releaseRepo:'osgp-release-local', snapshotRepo:'osgp-snapshot-local', server: server
+//rtMaven.resolver releaseRepo:'osgp-release', snapshotRepo:'osgp-snapshot', server: server
+//def buildInfo = Artifactory.newBuildInfo()
 
 pipeline {
     agent any
@@ -40,20 +40,19 @@ pipeline {
         
         stage ('Build') {
             steps {
-                // TODO: use withMaven
-                //withMaven(
-                      // Maven installation declared in the Jenkins "Global Tool Configuration"
-                //	maven: 'M3',
-                      // Maven settings.xml file defined with the Jenkins Config File Provider Plugin
-                      // Maven settings and global settings can also be defined in Jenkins Global Tools Configuration
-                //	mavenSettingsConfig: 'my-maven-settings',
-                //	mavenLocalRepo: '.repository') {
+                withMaven(
+                    // Maven installation declared in the Jenkins "Global Tool Configuration"
+                	maven: 'Apache Maven 3.5.0',
+                    // Maven settings.xml file defined with the Jenkins Config File Provider Plugin
+                    // Maven settings and global settings can also be defined in Jenkins Global Tools Configuration
+                	mavenSettingsConfig: 'my-maven-settings',
+                	mavenLocalRepo: '.repository') {
 
                       // Run the maven build
-                //	sh "mvn clean install -DskipTestJarWithDependenciesAssembly=false"
-                //} // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe reports and FindBugs reports
+                	sh "mvn clean install -DskipTestJarWithDependenciesAssembly=false"
+                } // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe reports and FindBugs reports
                 
-                sh "mvn clean install -DskipTestJarWithDependenciesAssembly=false"
+                //sh "mvn clean install -DskipTestJarWithDependenciesAssembly=false"
                 
                 //rtMaven.run pom: 'pom.xml', goals: 'clean install -DskipTestJarWithDependenciesAssembly=false', buildInfo: buildInfo
             }
