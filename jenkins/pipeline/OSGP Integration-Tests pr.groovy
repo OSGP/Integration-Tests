@@ -7,12 +7,12 @@ def playbook = stream + '-at.yml'
 def extravars = 'ec2_instance_type=t2.large'
 def repo = 'git@github.com:SmartSocietyServices/Integration-Tests.git'
 
-//def server = Artifactory.server 'OSGP Artifactory Server'
-//def rtMaven = Artifactory.newMavenBuild()
-//rtMaven.tool = 'Apache Maven 3.5.0' // Tool name from Jenkins configuration
-//rtMaven.deployer releaseRepo:'osgp-release-local', snapshotRepo:'osgp-snapshot-local', server: server
-//rtMaven.resolver releaseRepo:'osgp-release', snapshotRepo:'osgp-snapshot', server: server
-//def buildInfo = Artifactory.newBuildInfo()
+def server = Artifactory.server 'OSGP Artifactory Server'
+def rtMaven = Artifactory.newMavenBuild()
+rtMaven.tool = 'Apache Maven 3.5.0' // Tool name from Jenkins configuration
+rtMaven.deployer releaseRepo:'osgp-release-local', snapshotRepo:'osgp-snapshot-local', server: server
+rtMaven.resolver releaseRepo:'osgp-release', snapshotRepo:'osgp-snapshot', server: server
+def buildInfo = Artifactory.newBuildInfo()
 
 pipeline {
     agent any
@@ -53,15 +53,15 @@ pipeline {
                 	sh "mvn clean install -DskipTestJarWithDependenciesAssembly=false"
                 } // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe reports and FindBugs reports
                 
-                //sh "mvn clean install -DskipTestJarWithDependenciesAssembly=false"
+                sh "mvn clean install -DskipTestJarWithDependenciesAssembly=false"
                 
-                //rtMaven.run pom: 'pom.xml', goals: 'clean install -DskipTestJarWithDependenciesAssembly=false', buildInfo: buildInfo
+		// rtMaven.run pom: 'pom.xml', goals: 'clean install -DskipTestJarWithDependenciesAssembly=false', buildInfo: buildInfo
             }
         }
         
         //stage ('Publish build info') {
         //	steps { 
-	//			server.publishBuildInfo buildInfo
+		//		server.publishBuildInfo buildInfo
         //	} 
         //}
 
@@ -103,8 +103,9 @@ echo Found cucumber tags: [$EXTRACTED_TAGS]'''
 
         stage ('Collect coverage') {
             steps {
-                // TODO: use withMaven
-                sh "/usr/local/apache-maven/bin/mvn -Djacoco.destFile=target/code-coverage/jacoco-it.exec -Djacoco.address=${servername}.dev.osgp.cloud org.jacoco:jacoco-maven-plugin:0.7.9:dump"
+                withMaven {
+                    sh "mvn -Djacoco.destFile=target/code-coverage/jacoco-it.exec -Djacoco.address=${servername}.dev.osgp.cloud org.jacoco:jacoco-maven-plugin:0.7.9:dump"
+		}
             }
         }
 
