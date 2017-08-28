@@ -28,27 +28,28 @@ pipeline {
             steps {
                 // Example sha1 c0c708ef65fa1217e84d9762c974e6b8a40d35b3
                 deleteDir()
-                checkout([$class: 'GitSCM', branches: [[name: '${sha1}']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '68539ca2-6175-4f68-a7af-caa86f7aa37f', refspec: '+refs/pull/*:refs/remotes/origin/pr/*', url: 'git@github.com:OSGP/Integration-Tests.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '${sha1}']], 
+                doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', 
+                disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, 
+                reference: '', trackingSubmodules: true]], submoduleCfg: [], 
+                userRemoteConfigs: [[credentialsId: '68539ca2-6175-4f68-a7af-caa86f7aa37f', 
+                refspec: '+refs/pull/*:refs/remotes/origin/pr/*', 
+                url: 'git@github.com:OSGP/Integration-Tests.git']]])
             }
         }
 
         stage ('Set status') {
             steps {
-                step([$class: 'GitHubSetCommitStatusBuilder', contextSource: [$class: 'ManuallyEnteredCommitContextSource']])
+                step([$class: 'GitHubSetCommitStatusBuilder', 
+                contextSource: [$class: 'ManuallyEnteredCommitContextSource']])
             }
         }
         
         stage ('Build') {
             steps {
-                withMaven(
-                    // Maven installation declared in the Jenkins "Global Tool Configuration"
-                	maven: 'Apache Maven 3.5.0',
-                    // Maven settings.xml file defined with the Jenkins Config File Provider Plugin
-                    // Maven settings and global settings can also be defined in Jenkins Global Tools Configuration
-                	mavenSettingsConfig: 'my-maven-settings',
-                	mavenLocalRepo: '.repository') {
+                withMaven {
 
-                      // Run the maven build
+                    // Run the maven build
                 	sh "mvn clean install -DskipTestJarWithDependenciesAssembly=false"
                 } // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe reports and FindBugs reports
                 
