@@ -109,6 +109,5 @@
     <module>cucumber-tests-platform-smartmetering</module>
     <module>cucumber-tests-platform-microgrids</module>
     <module>cucumber-tests-platform-distributionautomation</module>
-
   </modules>
 </project>
