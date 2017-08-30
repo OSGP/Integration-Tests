@@ -121,6 +121,10 @@
       <name>smartbear repository</name>
       <url>http://www.soapui.org/repository/maven2/</url>
     </repository>
+    <repository>
+      <id>mvnrepository</id>
+      <url>http://mvnrepository.com/artifact/</url>
+    </repository>
   </repositories>
   
   <pluginRepositories>
