@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.alliander.osgp</groupId>
     <artifactId>parent-integration-tests</artifactId>
-    <version>4.16.0</version>
+    <version>4.17.1</version>
     <relativePath>../parent-integration-tests/pom.xml</relativePath>
   </parent>
 
@@ -36,12 +36,8 @@
       <artifactId>logback-classic</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.smartbear.soapui</groupId>
-      <artifactId>soapui-maven-plugin</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jgoodies</groupId>
-      <artifactId>forms</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -178,6 +174,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+            <skipAssembly>${skipTestJarWithDependenciesAssembly}</skipAssembly>
+        </configuration>
         <executions>
           <execution>
             <phase>package</phase>
@@ -196,10 +195,6 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.smartbear.soapui</groupId>
-        <artifactId>soapui-maven-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

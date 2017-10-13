@@ -15,6 +15,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -90,6 +91,24 @@ public class DlmsDeviceSteps {
         this.createDeviceAuthorisationInCoreDatabase(device);
 
         this.createDlmsDeviceInProtocolAdapterDatabase(inputSettings);
+    }
+
+    @Given("^all mbus channels are occupied for E-meter \"([^\"]*)\"$")
+    public void allMBusChannelsAreOccupiedForEMeter(final String eMeter) throws Throwable {
+        /**
+         * A smart meter has 4 M-Bus channels available, so make sure that for
+         * each channel an M-Bus device is created
+         */
+        for (int index = 1; index <= 4; index++) {
+            final Map<String, String> inputSettings = new HashMap<>();
+            inputSettings.put(PlatformSmartmeteringKeys.DEVICE_IDENTIFICATION, "TESTG10240000002" + index);
+            inputSettings.put(PlatformSmartmeteringKeys.GATEWAY_DEVICE_IDENTIFICATION, eMeter);
+            inputSettings.put(PlatformSmartmeteringKeys.CHANNEL, Integer.toString(index));
+            inputSettings.put(PlatformSmartmeteringKeys.MBUS_PRIMARY_ADDRESS, Integer.toString(index));
+            inputSettings.put(PlatformSmartmeteringKeys.DEVICE_TYPE, SMART_METER_G);
+            this.aDlmsDevice(inputSettings);
+        }
+
     }
 
     @Then("^the dlms device with identification \"([^\"]*)\" exists$")
@@ -350,7 +369,22 @@ public class DlmsDeviceSteps {
 
     private DeviceModel getDeviceModel(final Map<String, String> inputSettings) {
         if (inputSettings.containsKey(PlatformKeys.KEY_DEVICE_MODEL)) {
-            return this.deviceModelRepository.findByModelCode(inputSettings.get(PlatformKeys.KEY_DEVICE_MODEL));
+            /*
+             * Model code does not uniquely identify a device model, which is
+             * why deviceModelRepository is changed to return a list of device
+             * models. In the test data that is set up, there probably is only
+             * one device model for the given model code, and just selecting the
+             * first device model returned should work.
+             *
+             * A better solution might be to add the manufacturer in the
+             * scenario data and do a lookup by manufacturer and model code,
+             * which should uniquely define the device model.
+             */
+            final List<DeviceModel> deviceModels = this.deviceModelRepository
+                    .findByModelCode(inputSettings.get(PlatformKeys.KEY_DEVICE_MODEL));
+            if (!deviceModels.isEmpty()) {
+                return deviceModels.get(0);
+            }
         }
         return null;
     }
