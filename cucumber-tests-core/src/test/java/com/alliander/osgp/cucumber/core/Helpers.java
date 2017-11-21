@@ -492,10 +492,8 @@ public class Helpers {
 
     public static String getString(final Map<String, String> settings, final String key) {
         String value = null;
-        if (settings.containsKey(key)) {
-            if (!settings.get(key).equalsIgnoreCase("null")) {
-                value = settings.get(key);
-            }
+        if (settings.containsKey(key) && !settings.get(key).equalsIgnoreCase("null")) {
+            value = settings.get(key);
         }
         return value;
     }

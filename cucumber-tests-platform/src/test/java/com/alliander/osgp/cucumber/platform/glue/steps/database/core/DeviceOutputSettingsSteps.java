@@ -7,8 +7,6 @@
  */
 package com.alliander.osgp.cucumber.platform.glue.steps.database.core;
 
-import static com.alliander.osgp.cucumber.core.Helpers.getEnum;
-import static com.alliander.osgp.cucumber.core.Helpers.getInteger;
 import static com.alliander.osgp.cucumber.core.Helpers.getString;
 
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alliander.osgp.cucumber.core.GlueBase;
 import com.alliander.osgp.cucumber.platform.PlatformDefaults;
 import com.alliander.osgp.cucumber.platform.PlatformKeys;
+import com.alliander.osgp.cucumber.platform.core.converters.DeviceOutputSettingConverter;
 import com.alliander.osgp.domain.core.entities.DeviceOutputSetting;
 import com.alliander.osgp.domain.core.entities.Ssld;
 import com.alliander.osgp.domain.core.repositories.SsldRepository;
@@ -33,54 +32,23 @@ public class DeviceOutputSettingsSteps extends GlueBase {
     private SsldRepository ssldRepository;
 
     /**
-     *
-     * @param settings
-     * @throws Throwable
+     * Adds a single device output setting to the device.
      */
     @Given("^a device output setting$")
     public void aDeviceOutputSetting(final Map<String, String> settings) throws Throwable {
-
-        final String deviceIdentification = getString(settings, PlatformKeys.KEY_DEVICE_IDENTIFICATION,
-                PlatformDefaults.DEFAULT_DEVICE_IDENTIFICATION);
-
-        final Ssld device = this.ssldRepository.findByDeviceIdentification(deviceIdentification);
-
-        final List<DeviceOutputSetting> outputSettings = new ArrayList<>();
-        final DeviceOutputSetting deviceOutputSetting = new DeviceOutputSetting(
-                getInteger(settings, PlatformKeys.KEY_INTERNALID,
-                        PlatformDefaults.DEFAULT_DEVICE_OUTPUT_SETTING_INTERNALID),
-                getInteger(settings, PlatformKeys.KEY_EXTERNALID,
-                        PlatformDefaults.DEFAULT_DEVICE_OUTPUT_SETTING_EXTERNALID),
-                getEnum(settings, PlatformKeys.KEY_RELAY_TYPE, RelayType.class,
-                        PlatformDefaults.DEFAULT_DEVICE_OUTPUT_SETTING_RELAY_TYPE),
-                getString(settings, PlatformKeys.KEY_ALIAS, PlatformDefaults.DEFAULT_DEVICE_OUTPUT_SETTING_ALIAS));
-        outputSettings.add(deviceOutputSetting);
-        device.updateOutputSettings(outputSettings);
-
-        this.ssldRepository.save(device);
+        this.deviceOutputSettings(settings);
     }
 
+    /**
+     * Adds zero or more device output settings to the device.
+     */
     @Given("^device output settings$")
     public void deviceOutputSettings(final Map<String, String> settings) throws Throwable {
         final String deviceIdentification = getString(settings, PlatformKeys.KEY_DEVICE_IDENTIFICATION,
                 PlatformDefaults.DEFAULT_DEVICE_IDENTIFICATION);
 
         final Ssld device = this.ssldRepository.findByDeviceIdentification(deviceIdentification);
-
-        final String[] deviceOutputSettings = getString(settings, PlatformKeys.DEVICE_OUTPUT_SETTINGS, "")
-                .split(PlatformKeys.SEPARATOR_SEMICOLON);
-
-        final List<DeviceOutputSetting> outputSettings = new ArrayList<>();
-        for (final String deviceOutputSetting : deviceOutputSettings) {
-            final String[] deviceOutputSettingsPart = deviceOutputSetting.split(PlatformKeys.SEPARATOR_COMMA);
-
-            final DeviceOutputSetting deviceOutputSettingsForLightValue = new DeviceOutputSetting(
-                    Integer.parseInt(deviceOutputSettingsPart[0]), Integer.parseInt(deviceOutputSettingsPart[1]),
-                    Enum.valueOf(RelayType.class, deviceOutputSettingsPart[2]), deviceOutputSettingsPart[3]);
-            outputSettings.add(deviceOutputSettingsForLightValue);
-        }
-
-        device.updateOutputSettings(outputSettings);
+        device.updateOutputSettings(DeviceOutputSettingConverter.toDeviceOutputSettings(settings));
 
         this.ssldRepository.save(device);
     }
