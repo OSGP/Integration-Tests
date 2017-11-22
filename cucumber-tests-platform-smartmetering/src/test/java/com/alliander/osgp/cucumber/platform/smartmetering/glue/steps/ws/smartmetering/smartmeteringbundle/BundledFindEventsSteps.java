@@ -23,7 +23,6 @@ public class BundledFindEventsSteps extends BaseBundleSteps {
 
     @Given("^the bundle request contains a find events action$")
     public void theBundleRequestContainsAFindEventsAction() throws Throwable {
-
         final FindEventsRequest action = new FindEventsRequestBuilder().withDefaults().build();
 
         this.addActionToBundleRequest(action);
@@ -31,7 +30,6 @@ public class BundledFindEventsSteps extends BaseBundleSteps {
 
     @Given("^the bundle request contains a find events action with parameters$")
     public void theBundleRequestContainsAFindEventsAction(final Map<String, String> parameters) throws Throwable {
-
         final FindEventsRequest action = new FindEventsRequestBuilder().fromParameterMap(parameters).build();
 
         this.addActionToBundleRequest(action);
@@ -39,21 +37,8 @@ public class BundledFindEventsSteps extends BaseBundleSteps {
 
     @Then("^the bundle response should contain a find events response$")
     public void theBundleResponseShouldContainAFindEventsResponse() throws Throwable {
-
         final Response response = this.getNextBundleResponse();
 
-        assertTrue("Not a valid response", response instanceof FindEventsResponse);
-    }
-
-    @Then("^the bundle response should contain a find events response with values$")
-    public void theBundleResponseShouldContainAFindEventsResponse(final Map<String, String> values) throws Throwable {
-
-        final Response response = this.getNextBundleResponse();
-
-        // NOTE: Unfortunately, when no events are found,
-        // the response currently does not contain any useful values to test against.
-        // (All fields in the response will be null)
-        // Otherwise additional asserts could be added here...
         assertTrue("Not a valid response", response instanceof FindEventsResponse);
     }
 

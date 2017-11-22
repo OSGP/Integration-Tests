@@ -74,8 +74,9 @@ public abstract class AbstractFindEventsReads {
                 findEventsResponse.getEvents().size());
 
         /*
-         * For every event in the response, check if it matches with the AllowedEventTypes list. If so, the EventType is
-         * from the correct type as expected.
+         * For every event in the response, check if it matches with the
+         * AllowedEventTypes list. If so, the EventType is from the correct type
+         * as expected.
          */
         for (final Event event : findEventsResponse.getEvents()) {
             Event eventMatch = null;

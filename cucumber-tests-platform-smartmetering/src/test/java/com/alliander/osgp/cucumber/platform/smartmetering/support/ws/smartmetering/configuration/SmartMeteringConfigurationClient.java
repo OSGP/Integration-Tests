@@ -14,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
+import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.ConfigureDefinableLoadProfileAsyncRequest;
+import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.ConfigureDefinableLoadProfileAsyncResponse;
+import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.ConfigureDefinableLoadProfileRequest;
+import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.ConfigureDefinableLoadProfileResponse;
 import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.GenerateAndReplaceKeysAsyncRequest;
 import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.GenerateAndReplaceKeysAsyncResponse;
 import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.GenerateAndReplaceKeysRequest;
@@ -54,6 +58,10 @@ import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetEncry
 import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetEncryptionKeyExchangeOnGMeterAsyncResponse;
 import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetEncryptionKeyExchangeOnGMeterRequest;
 import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetEncryptionKeyExchangeOnGMeterResponse;
+import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetMbusUserKeyByChannelAsyncRequest;
+import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetMbusUserKeyByChannelAsyncResponse;
+import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetMbusUserKeyByChannelRequest;
+import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetMbusUserKeyByChannelResponse;
 import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetPushSetupSmsAsyncRequest;
 import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetPushSetupSmsAsyncResponse;
 import com.alliander.osgp.adapter.ws.schema.smartmetering.configuration.SetPushSetupSmsRequest;
@@ -227,6 +235,24 @@ public class SmartMeteringConfigurationClient extends SmartMeteringBaseClient {
                 .marshalSendAndReceive(setEncryptionKeyExchangeOnGMeterAsyncRequest);
     }
 
+    public SetMbusUserKeyByChannelAsyncResponse setMbusUserKeyByChannel(
+            final SetMbusUserKeyByChannelRequest setMbusUserKeyByChannelRequest)
+            throws WebServiceSecurityException, GeneralSecurityException, IOException {
+        return (SetMbusUserKeyByChannelAsyncResponse) this.getTemplate()
+                .marshalSendAndReceive(setMbusUserKeyByChannelRequest);
+    }
+
+    public SetMbusUserKeyByChannelResponse getSetMbusUserKeyByChannelResponse(
+            final SetMbusUserKeyByChannelAsyncRequest setMbusUserKeyByChannelAsyncRequest)
+            throws WebServiceSecurityException, GeneralSecurityException, IOException {
+
+        final String correlationUid = setMbusUserKeyByChannelAsyncRequest.getCorrelationUid();
+        this.waitForDlmsResponseData(correlationUid);
+
+        return (SetMbusUserKeyByChannelResponse) this.getTemplate()
+                .marshalSendAndReceive(setMbusUserKeyByChannelAsyncRequest);
+    }
+
     public ReplaceKeysAsyncResponse replaceKeys(final ReplaceKeysRequest replaceKeysRequest)
             throws WebServiceSecurityException, GeneralSecurityException, IOException {
 
@@ -277,6 +303,24 @@ public class SmartMeteringConfigurationClient extends SmartMeteringBaseClient {
 
         return (SetClockConfigurationResponse) this.getTemplate()
                 .marshalSendAndReceive(setClockConfigurationAsyncRequest);
+    }
+
+    public ConfigureDefinableLoadProfileAsyncResponse configureDefinableLoadProfile(
+            final ConfigureDefinableLoadProfileRequest configureDefinableLoadProfileRequest)
+            throws WebServiceSecurityException, GeneralSecurityException, IOException {
+        return (ConfigureDefinableLoadProfileAsyncResponse) this.getTemplate()
+                .marshalSendAndReceive(configureDefinableLoadProfileRequest);
+    }
+
+    public ConfigureDefinableLoadProfileResponse getConfigureDefinableLoadProfileResponse(
+            final ConfigureDefinableLoadProfileAsyncRequest configureDefinableLoadProfileAsyncRequest)
+            throws WebServiceSecurityException, GeneralSecurityException, IOException {
+
+        final String correlationUid = configureDefinableLoadProfileAsyncRequest.getCorrelationUid();
+        this.waitForDlmsResponseData(correlationUid);
+
+        return (ConfigureDefinableLoadProfileResponse) this.getTemplate()
+                .marshalSendAndReceive(configureDefinableLoadProfileAsyncRequest);
     }
 
     public SetPushSetupSmsAsyncResponse setPushSetupSms(final SetPushSetupSmsRequest request)

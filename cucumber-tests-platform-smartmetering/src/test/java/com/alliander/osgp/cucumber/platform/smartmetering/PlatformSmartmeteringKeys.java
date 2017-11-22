@@ -61,6 +61,9 @@ public class PlatformSmartmeteringKeys extends com.alliander.osgp.cucumber.platf
     public static final String KEY_DEVICE_MASTERKEY = "Master_key";
     public static final String KEY_DEVICE_AUTHENTICATIONKEY = "Authentication_key";
     public static final String KEY_DEVICE_ENCRYPTIONKEY = "Encryption_key";
+    public static final String MBUS_DEFAULT_KEY = "MbusDefaultKey";
+    public static final String MBUS_USER_KEY = "MbusUserKey";
+    public static final String PASSWORD = "Password";
 
     public static final String OBIS_CODE_A = "ObisCodeA";
     public static final String OBIS_CODE_B = "ObisCodeB";
@@ -150,4 +153,10 @@ public class PlatformSmartmeteringKeys extends com.alliander.osgp.cucumber.platf
     public static final String DAY_PROFILE_START_TIME = "StartTime";
     public static final String DAY_PROFILE_SCRIPT_SELECTOR = "ScriptSelector";
 
+    public final static String NUMBER_OF_CAPTURE_OBJECTS = "NumberOfCaptureObjects";
+    public final static String CAPTURE_OBJECT_CLASS_ID = "CaptureObject_ClassId";
+    public final static String CAPTURE_OBJECT_LOGICAL_NAME = "CaptureObject_LogicalName";
+    public final static String CAPTURE_OBJECT_ATTRIBUTE_INDEX = "CaptureObject_AttributeIndex";
+    public final static String CAPTURE_OBJECT_DATA_INDEX = "CaptureObject_DataIndex";
+    public final static String CAPTURE_PERIOD = "CapturePeriod";
 }

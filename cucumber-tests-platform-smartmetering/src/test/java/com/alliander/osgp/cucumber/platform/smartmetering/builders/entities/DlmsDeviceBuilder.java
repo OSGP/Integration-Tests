@@ -7,6 +7,8 @@
  */
 package com.alliander.osgp.cucumber.platform.smartmetering.builders.entities;
 
+import static com.alliander.osgp.cucumber.core.Helpers.getLong;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -39,19 +41,25 @@ public class DlmsDeviceBuilder implements CucumberBuilder<DlmsDevice> {
     private Long clientId = PlatformSmartmeteringDefaults.CLIENT_ID;
     private Long logicalId = PlatformSmartmeteringDefaults.LOGICAL_ID;
     private boolean inDebugMode = PlatformSmartmeteringDefaults.IN_DEBUG_MODE;
+    private Long mbusIdentificationNumber = null;
+    private String mbusManufacturerIdentification = null;
 
     private final SecurityKeyBuilder passwordBuilder = new SecurityKeyBuilder()
             .setSecurityKeyType(SecurityKeyType.PASSWORD).setKey(PlatformSmartmeteringDefaults.PASSWORD);
-    private final SecurityKeyBuilder authenticationSecurityKeyBuilder = new SecurityKeyBuilder().setSecurityKeyType(
-            SecurityKeyType.E_METER_AUTHENTICATION).setKey(PlatformSmartmeteringDefaults.SECURITY_KEY_A_DB);
-    private final SecurityKeyBuilder encryptionSecurityKeyBuilder = new SecurityKeyBuilder().setSecurityKeyType(
-            SecurityKeyType.E_METER_ENCRYPTION).setKey(PlatformSmartmeteringDefaults.SECURITY_KEY_E_DB);
-    private final SecurityKeyBuilder masterSecurityKeyBuilder = new SecurityKeyBuilder().setSecurityKeyType(
-            SecurityKeyType.E_METER_MASTER).setKey(PlatformSmartmeteringDefaults.SECURITY_KEY_M_DB);
-    private final SecurityKeyBuilder mbusEncryptionSecurityKeyBuilder = new SecurityKeyBuilder().setSecurityKeyType(
-            SecurityKeyType.G_METER_ENCRYPTION).setKey(PlatformSmartmeteringDefaults.SECURITY_KEY_G_ENCRYPTION);
-    private final SecurityKeyBuilder mbusMasterSecurityKeyBuilder = new SecurityKeyBuilder().setSecurityKeyType(
-            SecurityKeyType.G_METER_MASTER).setKey(PlatformSmartmeteringDefaults.SECURITY_KEY_G_MASTER);
+    private final SecurityKeyBuilder authenticationSecurityKeyBuilder = new SecurityKeyBuilder()
+            .setSecurityKeyType(SecurityKeyType.E_METER_AUTHENTICATION)
+            .setKey(PlatformSmartmeteringDefaults.SECURITY_KEY_A_DB);
+    private final SecurityKeyBuilder encryptionSecurityKeyBuilder = new SecurityKeyBuilder()
+            .setSecurityKeyType(SecurityKeyType.E_METER_ENCRYPTION)
+            .setKey(PlatformSmartmeteringDefaults.SECURITY_KEY_E_DB);
+    private final SecurityKeyBuilder masterSecurityKeyBuilder = new SecurityKeyBuilder()
+            .setSecurityKeyType(SecurityKeyType.E_METER_MASTER).setKey(PlatformSmartmeteringDefaults.SECURITY_KEY_M_DB);
+    private final SecurityKeyBuilder mbusEncryptionSecurityKeyBuilder = new SecurityKeyBuilder()
+            .setSecurityKeyType(SecurityKeyType.G_METER_ENCRYPTION)
+            .setKey(PlatformSmartmeteringDefaults.SECURITY_KEY_G_ENCRYPTION);
+    private final SecurityKeyBuilder mbusMasterSecurityKeyBuilder = new SecurityKeyBuilder()
+            .setSecurityKeyType(SecurityKeyType.G_METER_MASTER)
+            .setKey(PlatformSmartmeteringDefaults.SECURITY_KEY_G_MASTER);
 
     public DlmsDeviceBuilder setDeviceIdentification(final String deviceIdentification) {
         this.deviceIdentification = deviceIdentification;
@@ -145,6 +153,16 @@ public class DlmsDeviceBuilder implements CucumberBuilder<DlmsDevice> {
 
     public DlmsDeviceBuilder setInDebugMode(final boolean inDebugMode) {
         this.inDebugMode = inDebugMode;
+        return this;
+    }
+
+    public DlmsDeviceBuilder setMbusIdentificationNumber(final Long value) {
+        this.mbusIdentificationNumber = value;
+        return this;
+    }
+
+    public DlmsDeviceBuilder setMbusManufacturerIdentification(final String value) {
+        this.mbusManufacturerIdentification = value;
         return this;
     }
 
@@ -252,25 +270,49 @@ public class DlmsDeviceBuilder implements CucumberBuilder<DlmsDevice> {
             this.setChallengeLength(Integer.parseInt(inputSettings.get(PlatformSmartmeteringKeys.CHALLENGE_LENGTH)));
         }
         if (inputSettings.containsKey(PlatformSmartmeteringKeys.WITH_LIST_SUPPORTED)) {
-            this.setWithListSupported(Boolean.parseBoolean(inputSettings.get(PlatformSmartmeteringKeys.WITH_LIST_SUPPORTED)));
+            this.setWithListSupported(
+                    Boolean.parseBoolean(inputSettings.get(PlatformSmartmeteringKeys.WITH_LIST_SUPPORTED)));
         }
         if (inputSettings.containsKey(PlatformSmartmeteringKeys.SELECTIVE_ACCESS_SUPPORTED)) {
-            this.setSelectiveAccessSupported(Boolean.parseBoolean(inputSettings.get(PlatformSmartmeteringKeys.SELECTIVE_ACCESS_SUPPORTED)));
+            this.setSelectiveAccessSupported(
+                    Boolean.parseBoolean(inputSettings.get(PlatformSmartmeteringKeys.SELECTIVE_ACCESS_SUPPORTED)));
         }
         if (inputSettings.containsKey(PlatformSmartmeteringKeys.IP_ADDRESS_IS_STATIC)) {
-            this.setIpAddressIsStatic(Boolean.parseBoolean(inputSettings.get(PlatformSmartmeteringKeys.IP_ADDRESS_IS_STATIC)));
-        }
-        if (inputSettings.containsKey(PlatformSmartmeteringKeys.PORT)) {
-            this.setPort(Long.parseLong(inputSettings.get(PlatformSmartmeteringKeys.PORT)));
+            this.setIpAddressIsStatic(
+                    Boolean.parseBoolean(inputSettings.get(PlatformSmartmeteringKeys.IP_ADDRESS_IS_STATIC)));
         }
         if (inputSettings.containsKey(PlatformSmartmeteringKeys.CLIENT_ID)) {
             this.setClientId(Long.parseLong(inputSettings.get(PlatformSmartmeteringKeys.CLIENT_ID)));
         }
-        if (inputSettings.containsKey(PlatformSmartmeteringKeys.LOGICAL_ID)) {
-            this.setLogicalId(Long.parseLong(inputSettings.get(PlatformSmartmeteringKeys.LOGICAL_ID)));
-        }
         if (inputSettings.containsKey(PlatformSmartmeteringKeys.IN_DEBUG_MODE)) {
             this.setInDebugMode(Boolean.parseBoolean(inputSettings.get(PlatformSmartmeteringKeys.IN_DEBUG_MODE)));
+        }
+        if (inputSettings.containsKey(PlatformSmartmeteringKeys.MBUS_IDENTIFICATION_NUMBER)) {
+            this.setMbusIdentificationNumber(
+                    getLong(inputSettings, PlatformSmartmeteringKeys.MBUS_IDENTIFICATION_NUMBER));
+        }
+        if (inputSettings.containsKey(PlatformSmartmeteringKeys.MBUS_MANUFACTURER_IDENTIFICATION)) {
+            this.setMbusManufacturerIdentification(
+                    inputSettings.get(PlatformSmartmeteringKeys.MBUS_MANUFACTURER_IDENTIFICATION));
+        }
+
+        /**
+         * For port/logical_id we want to be able to override the default value
+         * to be null to enable testing against a real device.
+         */
+        if (inputSettings.containsKey(PlatformSmartmeteringKeys.LOGICAL_ID)) {
+            if (inputSettings.get(PlatformSmartmeteringKeys.LOGICAL_ID).isEmpty()) {
+                this.setLogicalId(null);
+            } else {
+                this.setLogicalId(Long.parseLong(inputSettings.get(PlatformSmartmeteringKeys.LOGICAL_ID)));
+            }
+        }
+        if (inputSettings.containsKey(PlatformSmartmeteringKeys.PORT)) {
+            if (inputSettings.get(PlatformSmartmeteringKeys.PORT).isEmpty()) {
+                this.setPort(null);
+            } else {
+                this.setPort(Long.parseLong(inputSettings.get(PlatformSmartmeteringKeys.PORT)));
+            }
         }
 
         return this;
@@ -298,6 +340,8 @@ public class DlmsDeviceBuilder implements CucumberBuilder<DlmsDevice> {
         dlmsDevice.setClientId(this.clientId);
         dlmsDevice.setLogicalId(this.logicalId);
         dlmsDevice.setInDebugMode(this.inDebugMode);
+        dlmsDevice.setMbusIdentificationNumber(this.mbusIdentificationNumber);
+        dlmsDevice.setMbusManufacturerIdentification(this.mbusManufacturerIdentification);
 
         /**
          * It is not ideal that the build() method for security keys is called
