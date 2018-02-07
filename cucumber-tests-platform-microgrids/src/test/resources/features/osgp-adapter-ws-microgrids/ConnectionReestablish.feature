@@ -1,8 +1,5 @@
-# This feature/scenario is skipped because of it's long duration
-# and issues with the recieve a notification step
-# Perhaps a NightlyBuildOnly tag could be used here
-@Skip @MicroGrids @Platform @Iec61850MockServerPampus
-Feature: MicroGrids Re-establish Connection
+@NightlyBuildOnly @Microgrids @Platform @Iec61850MockServerPampus
+Feature: Microgrids Re-establish Connection
   As MSP 
   I want to know when a connection between OSGP and RTU is lost or re-established.
 
