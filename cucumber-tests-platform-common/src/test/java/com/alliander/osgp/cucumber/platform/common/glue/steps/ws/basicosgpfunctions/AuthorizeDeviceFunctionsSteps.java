@@ -95,6 +95,11 @@ public class AuthorizeDeviceFunctionsSteps extends GlueBase {
         }
     }
 
+    @When("^a set device authorization request was processed$")
+    public void aSetDeviceAuthorizationRequestWasProcessed(final Map<String, String> requestParameters) {
+        this.receivingADeviceAuthorizationRequest(requestParameters);
+    }
+
     @When("receiving a device function request")
     public void receivingADeviceFunctionRequest(final Map<String, String> requestParameters) {
         this.deviceFunction = getEnum(requestParameters, PlatformCommonKeys.DEVICE_FUNCTION, DeviceFunction.class);
