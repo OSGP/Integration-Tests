@@ -40,7 +40,6 @@ import com.alliander.osgp.adapter.ws.schema.core.devicemanagement.FindEventsRequ
 import com.alliander.osgp.adapter.ws.schema.core.devicemanagement.SetEventNotificationsRequest;
 import com.alliander.osgp.adapter.ws.schema.core.firmwaremanagement.GetFirmwareVersionRequest;
 import com.alliander.osgp.adapter.ws.schema.core.firmwaremanagement.UpdateFirmwareRequest;
-import com.alliander.osgp.cucumber.core.GlueBase;
 import com.alliander.osgp.cucumber.core.ScenarioContext;
 import com.alliander.osgp.cucumber.core.Wait;
 import com.alliander.osgp.cucumber.platform.common.PlatformCommonDefaults;
@@ -60,7 +59,7 @@ import cucumber.api.java.en.When;
 /**
  * Class with all the AuthorizeDeviceFunctions steps
  */
-public class AuthorizeDeviceFunctionsSteps extends GlueBase {
+public class AuthorizeDeviceFunctionsSteps {
 
     @Autowired
     private AdminDeviceManagementClient adminDeviceManagementClient;
@@ -93,11 +92,6 @@ public class AuthorizeDeviceFunctionsSteps extends GlueBase {
             LOGGER.info("Exception: {}, message {}", e.getClass().getSimpleName(), e.getMessage());
             this.exception = e;
         }
-    }
-
-    @When("^a set device authorization request was processed$")
-    public void aSetDeviceAuthorizationRequestWasProcessed(final Map<String, String> requestParameters) {
-        this.receivingADeviceAuthorizationRequest(requestParameters);
     }
 
     @When("receiving a device function request")
