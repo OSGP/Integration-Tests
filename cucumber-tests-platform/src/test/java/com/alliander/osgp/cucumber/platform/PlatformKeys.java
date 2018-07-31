@@ -146,6 +146,7 @@ public class PlatformKeys extends Keys {
     public static final String KEY_LATITUDE = "gpsLatitude";
     public static final String KEY_LIGHTTYPE = "LightType";
     public static final String KEY_LIGHTVALUES = "LightValues";
+    public static final String KEY_TARIFFVALUES = "TariffValues";
     public static final String KEY_LONGITUDE = "gpsLongitude";
     public static final String KEY_MANUFACTURER = "Manufacturer";
     public static final String KEY_MEASUREMENT_FILTER_ID = "MeasurementFilterId";
@@ -172,9 +173,11 @@ public class PlatformKeys extends Keys {
     public static final String KEY_ORGANIZATION = "Organization";
     public static final String KEY_ORGANIZATION_DESCRIPTION = "Description";
     public static final String KEY_ORGANIZATION_IDENTIFICATION = "OrganizationIdentification";
+    public static final String KEY_ORGANIZATION_IDENTIFICATION_TO_FIND = "OrganizationIdentificationToFind";
     public static final String KEY_OSLP_RESULT = "OSLPResult";
 
     public static final String KEY_OWNER = "Owner";
+    public static final String KEY_SECOND_OWNER = "SecondOwner";
     public static final String KEY_PAGE = "Page";
     public static final String KEY_PAGE_SIZE = "PageSize";
     public static final String KEY_PERIOD_TYPE = "PeriodType";
